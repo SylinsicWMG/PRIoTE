@@ -30,5 +30,9 @@ A project to attempt to containerise GCHQ's HQDM and MagmaCore
         </ol>
     </ol>
 
+## Hardening
+
+Stripping down of the image to bare minimum, using [strip-image](https://github.com/SylinsicWMG/strip-image)
+
 ## License
 HQDM and MagmaCore are accessed under the GCHQ Contributor Licence Agreement. These projects were developed by GCHQ and are not my own.
