@@ -1,40 +1,33 @@
 #!/bin/bash
 
 ./strip-image \
-	-f /tmp/mvn \
 	-i priote:latest \
 	-t priote_stripped:latest \
 	-d Dockerfile-Stripped \
 	-x 3330 \
-	-f /bin/basename \
-	-f /bin/bash \
-	-f /bin/cd \
-	-f /bin/dirname \
-	-f /bin/echo \
-	-f /bin/expr \
-	-f /bin/pwd \
-	-f /bin/readlink \
-	-f /bin/sh \
-	-f /bin/test \
-	-f /bin/tr \
-	-f /bin/uname \
-	-f /bin/which \
 	-f /etc/group \
+	-f /etc/nsswitch.conf \
 	-f /etc/passwd \
-	-f '/lib64/*' \
 	-f /root/.m2/ \
+	-f /usr/bin/basename \
+	-f /usr/bin/bash \
+	-f /usr/bin/cd \
 	-f /usr/bin/coreutils \
-	-f /usr/bin/mvn \
+	-f /usr/bin/dirname \
+	-f /usr/bin/echo \
+	-f /usr/bin/expr \
+	-f /usr/bin/ln \
+	-f /usr/bin/ls \
+	-f /usr/bin/pwd \
+	-f /usr/bin/readlink \
+	-f /usr/bin/sh \
+	-f /usr/bin/test \
+	-f /usr/bin/tr \
+	-f /usr/bin/uname \
 	-f /usr/java/openjdk-15/ \
-	-f /usr/lib/locale/ \
-	-f /usr/lib/x86_64-linux-gnu/ \
-	-f '/usr/lib64' \
+	-f /usr/lib64/libc.so.6 \
+	-f /usr/lib64/libm.so.6 \
+	-f '/usr/lib64/libnss*' \
+	-f /usr/lib64/libz.so.1 \
 	-f /usr/share/maven/ \
 	-f /usr/src/mymaven/
-#	-f /usr/lib64/libc-2.28.so \
-#	-f /usr/lib64/libc.so.6 \
-#	-f /usr/lib64/libm-2.28.so \
-#	-f /usr/lib64/libm.so.6 \
-#	-f '/usr/lib64/libnss*' \
-#	-f /usr/lib64/libz.so.1 \
-#	-f /usr/lib64/libz.so.1.2.11 \
