@@ -1,9 +1,10 @@
 #!/bin/bash
 
-./strip-image \
+scripts/strip-image \
+	-f /tmp/strace/ \
 	-i priote:latest \
 	-t priote_stripped:latest \
-	-d Dockerfile-Stripped \
+	-d Dockerfile \
 	-x 3330 \
 	-f /etc/group \
 	-f /etc/nsswitch.conf \

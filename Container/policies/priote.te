@@ -1,0 +1,5 @@
+policy_module(priote,0.1)
+
+virt_sandbox_domain_template(priote);
+
+permissive priote_t;
