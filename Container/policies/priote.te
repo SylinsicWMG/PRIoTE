@@ -1,5 +1,31 @@
-policy_module(priote,0.1)
-
+policy_module(priote,1.0)
 virt_sandbox_domain_template(priote);
 
-permissive priote_t;
+# Generate requirements for the required types
+gen_require(`
+	type cgroup_t;
+	type container_file_t;
+	type container_runtime_t;
+	type http_port_t;
+	type node_t;
+	type sysfs_t;
+')
+
+# Declare types for input and output
+type priote_port_in_t;
+corenet_port(priote_port_in_t)
+
+# Begin 'allow' rules
+allow container_runtime_t priote_t:process transition;
+allow priote_t cgroup_t:file { getattr open read };
+allow priote_t container_file_t:chr_file { getattr ioctl open read write };
+allow priote_t container_runtime_t:fifo_file write;
+allow priote_t http_port_t:tcp_socket name_connect;
+allow priote_t node_t:tcp_socket node_bind;
+allow priote_t priote_port_in_t:tcp_socket name_bind;
+allow priote_t self:process execmem;
+allow priote_t self:tcp_socket { accept bind connect create getattr getopt listen read setopt write };
+allow priote_t self:udp_socket { connect create getattr setopt read write };
+allow priote_t sysfs_t:dir read;
+allow priote_t sysfs_t:file read;
+# End 'allow' rules
