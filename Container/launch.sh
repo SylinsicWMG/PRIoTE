@@ -1,7 +1,6 @@
 #!/bin/bash
-
+docker build -t priote:1.0 -t priote:latest .
 scripts/strip-image \
-	-f /tmp/strace/ \
 	-i priote:latest \
 	-t priote_stripped:latest \
 	-d Dockerfile \
@@ -32,3 +31,4 @@ scripts/strip-image \
 	-f /usr/lib64/libz.so.1 \
 	-f /usr/share/maven/ \
 	-f /usr/src/mymaven/
+docker run -it -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t priote_stripped:latest
