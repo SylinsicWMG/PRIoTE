@@ -1,8 +1,8 @@
 #!/bin/bash
-docker build -t priote:1.0 -t priote:latest .
+docker build -t priote_i:1.0 -t priote_i:latest .
 scripts/strip-image \
-	-i priote:latest \
-	-t priote_stripped:latest \
+	-i priote_i:latest \
+	-t priote_stripped_i:latest \
 	-d Dockerfile \
 	-x 3330 \
 	-f /etc/group \
@@ -31,4 +31,5 @@ scripts/strip-image \
 	-f /usr/lib64/libz.so.1 \
 	-f /usr/share/maven/ \
 	-f /usr/src/mymaven/
-docker run -it -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t priote_stripped:latest
+scripts/compile_selinux.sh
+docker run -it -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t --name priote_c priote_stripped_i:latest

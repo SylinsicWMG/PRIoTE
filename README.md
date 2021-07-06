@@ -65,20 +65,22 @@ Prior to any installation, ensure that your repository listings are updated and 
 ### Container
 
 1. Clone this repository:
-    - `git clone ssh://git@github.com/SylinsicWMG/priote.git --recurse-submodules`
+    - `git clone ssh://git@github.com/SylinsicWMG/priote.git`
 2. CD into the new folder for this repository:
     - `cd priote`
-3. Launching the container can be done either manually or automatically:
+3. Clone submodules of this repository:
+    - `git submodule update --init`
+4. Launching the container can be done either manually or automatically:
     - To launch manually:
         1. CD into the Container directory:
             - `cd Container`
         2. Build the docker image:
-            - `docker build -t priote:1.0 -t priote:latest .`
+            - `docker build -t priote_i:1.0 -t priote_i:latest .`
         3. Strip the image down to all that is required:
             - ```
               scripts/strip-image \
-                -i priote:latest \
-                -t priote_stripped:latest \
+                -i priote_i:latest \
+                -t priote_stripped_i:latest \
                 -d Dockerfile \
                 -x 3330 \
                 -f /etc/group \
@@ -113,12 +115,29 @@ Prior to any installation, ensure that your repository listings are updated and 
             - `sudo semodule -i priote.pp`
             - `sudo semanage port -a -t priote_port_in_t -p tcp 3330`
         4. Run the stripped image:
-            - `docker run -d -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t priote_stripped:latest`
+            - `docker run -d -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t --name priote_c priote_stripped_i:latest`
     - To launch with an automatic script:
         1. CD into the Container directory:
             - `cd Container`
         2. Run the launch script:</li>
             - `./launch.sh`
+
+---
+
+## Container Operation
+
+The container runs [entrypoint.sh](Container/files/entrypoint.sh) by default upon boot, which launches the application. No user input is required to simply run the container as is.
+
+- Running
+    - `docker run -d -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t --name priote_c priote_stripped_i:latest`
+- Killing
+    - `docker kill priote_c`
+- Starting
+    - `docker start priote_c`
+- Stopping
+    - `docker stop priote_c`
+- Restarting
+    - `docker restart priote_c`
 
 ---
 
