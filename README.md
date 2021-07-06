@@ -2,21 +2,74 @@
 
 ## About 
 
-A project that containerises GCHQ's HQDM and MagmaCore
+A project that containerises GCHQ's HQDM and Magma Core
 
-- [HQDM on github](https://github.com/gchq/HQDM.git)
-- [MagmaCore on github](https://github.com/gchq/MagmaCore.git)
+- [HQDM](https://github.com/gchq/HQDM.git)
+- [Magma Core](https://github.com/gchq/MagmaCore.git)
+
+---
+
+## Implementation
+
+To create the container for this environment, we first determine requirements of the two projects, [HQDM](https://github.com/gchq/HQDM.git) and [Magma Core](https://github.com/gchq/MagmaCore.git). All that is required is [Apache Maven](https://maven.apache.org/), and [Java Development Kit version 15](https://openjdk.java.net/projects/jdk/15/).
+Luckily for us, there is already a docker image for this which we can use: `maven:maven:3.8.1-openjdk-15`, so we use this image with the line `FROM maven:maven:3.8.1-openjdk-15` in our [Dockerfile](Container/Dockerfile)
+
+Now that we have a base image available for usage, we must add in the files for [HQDM](https://github.com/gchq/HQDM.git) and [Magma Core](https://github.com/gchq/MagmaCore.git). To do this, we clone each repository into a new subfolder `files`. We then add the line `COPY files/ /usr/rsc/mymaven` to our [Dockerfile](Container/Dockerfile) such that our files are copied into our new image. We declare our `WORKDIR` as `/usr/src/mymaven` such that we are working from this directory upon boot.
+
+Next, environmental variables must be declared in our [Dockerfile](Container/Dockerfile) to ensure our stripped image is able to successfully locate the appropriate programs and files for successful running.
+
+Finally, we must write two scripts, one to be ran on building of the image, and one to be ran on running of the container. The first of these, [build.sh](Container/files/build.sh), compiles the two projects in the work directory using maven. Whilst the latter, [entrypoint.sh](Container/files/entrypoint.sh), creates some symbolic links for ease of use once the image has been stripped, and then simply runs the [Magma Core](https://github.com/gchq/MagmaCore.git) application using maven. To add these scripts appropriately, we use the `RUN` and `ENTRYPOINT` keywords respectively.
 
 ---
 
 ## Installation
 
+Prior to any installation, ensure that your repository listings are updated and software packages are up-to-date.
+
+---
+
+### Docker
+
+#### Linux:
+
+1. Download the docker installation script using one of the following methods:
+    - `curl -fsSL https://get.docker.com/ -o install_docker.sh`
+    - `wget https://get.docker.com/ -o install_docker.sh`
+2. Enable execute permissions on the installation script:
+    - `chmod +x install_docker.sh`
+3. Run the installation script:
+    - `./install_docker.sh`
+
+#### Mac OSX
+
+1. Download the Docker Desktop installation program from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac), selecting the appropriate architecture for your device, direct links:
+    - [Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+    - [Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg)
+2. Open the downloaded `.dmg` file, and once loaded, drag the icon into the `Applications folder`:
+    ![Drag and drop image](https://docs.docker.com/docker-for-mac/images/docker-app-drag.png)
+    Source: https://docs.docker.com/docker-for-mac/images/docker-app-drag.png
+
+--- 
+
+### Git
+
+- Install using `apt`:
+    - `apt install git`
+- Install using `pacman`:
+    - `pacman -S git`
+- Install using `yum`:
+    - `yum install git`
+
+---
+
+### Container
+
 1. Clone this repository:
-    - `git clone https://github.com/SylinsicWMG/priote.git`
+    - `git clone ssh://git@github.com/SylinsicWMG/priote.git --recurse-submodules`
 2. CD into the new folder for this repository:
     - `cd priote`
-3. Launching the container can be done either manually (a) or automatically (b):
-    1. To launch manually:
+3. Launching the container can be done either manually or automatically:
+    - To launch manually:
         1. CD into the Container directory:
             - `cd Container`
         2. Build the docker image:
@@ -61,7 +114,7 @@ A project that containerises GCHQ's HQDM and MagmaCore
             - `sudo semanage port -a -t priote_port_in_t -p tcp 3330`
         4. Run the stripped image:
             - `docker run -d -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t priote_stripped:latest`
-    2. To launch with an automatic script:
+    - To launch with an automatic script:
         1. CD into the Container directory:
             - `cd Container`
         2. Run the launch script:</li>
