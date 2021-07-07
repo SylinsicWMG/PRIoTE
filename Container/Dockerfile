@@ -3,6 +3,7 @@ FROM maven:3.8.1-openjdk-15
 EXPOSE 3330
 
 COPY files/ /usr/src/mymaven
+COPY CustomJava/ /usr/src/mymaven/MagmaCore/src/main/java/
 
 WORKDIR /usr/src/mymaven
 

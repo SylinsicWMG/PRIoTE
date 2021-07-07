@@ -32,4 +32,4 @@ scripts/strip-image \
 	-f /usr/share/maven/ \
 	-f /usr/src/mymaven/
 scripts/compile_selinux.sh
-docker run -it -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t --name priote_c priote_stripped_i:latest
+docker run -it -p 3330:3330 --cap-drop=all --security-opt seccomp=policies/seccomp.json --security-opt label:type:priote_t --name priote_c -v "${PWD}/data":/usr/src/mymaven/data:rw,Z priote_stripped_i:latest
