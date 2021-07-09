@@ -13,6 +13,7 @@ scripts/strip-image \
 	-f /usr/bin/bash \
 	-f /usr/bin/cd \
 	-f /usr/bin/coreutils \
+	-f /usr/bin/curl \
 	-f /usr/bin/dirname \
 	-f /usr/bin/echo \
 	-f /usr/bin/expr \

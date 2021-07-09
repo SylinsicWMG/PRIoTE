@@ -45,6 +45,7 @@
         "getegid",
         "geteuid",
         "getgid",
+	      "getpeername",
         "getpgrp",
         "getpid",
         "getppid",

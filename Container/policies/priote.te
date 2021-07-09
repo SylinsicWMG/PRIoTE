@@ -22,7 +22,7 @@ allow priote_t container_file_t:chr_file { getattr ioctl open read write };
 allow priote_t container_runtime_t:fifo_file write;
 allow priote_t http_port_t:tcp_socket name_connect;
 allow priote_t node_t:tcp_socket node_bind;
-allow priote_t priote_port_in_t:tcp_socket name_bind;
+allow priote_t priote_port_in_t:tcp_socket { name_bind name_connect };
 allow priote_t self:process execmem;
 allow priote_t self:tcp_socket { accept bind connect create getattr getopt listen read setopt write };
 allow priote_t self:udp_socket { connect create getattr setopt read write };
