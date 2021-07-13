@@ -1,0 +1,4 @@
+var classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_class_of_sales_product_instance_impl =
+[
+    [ "ClassOfSalesProductInstanceImpl", "classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_class_of_sales_product_instance_impl.html#ab5e492e11e65346e6c2f842f4900f422", null ]
+];

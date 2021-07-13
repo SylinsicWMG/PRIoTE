@@ -1,0 +1,13 @@
+<map id="uk.gov.gchq.hqdm.model.MoneyAsset" name="uk.gov.gchq.hqdm.model.MoneyAsset">
+<area shape="rect" id="node1" title=" " alt="" coords="1945,27,2180,69"/>
+<area shape="rect" id="node2" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_asset.html" title=" " alt="" coords="1671,5,1897,32"/>
+<area shape="rect" id="node3" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_participant.html" title=" " alt="" coords="1364,5,1623,32"/>
+<area shape="rect" id="node4" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_physical_object.html" title=" " alt="" coords="1085,42,1309,83"/>
+<area shape="rect" id="node9" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_amount_of_money.html" title=" " alt="" coords="1672,57,1896,98"/>
+<area shape="rect" id="node5" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state.html" title=" " alt="" coords="805,83,1029,109"/>
+<area shape="rect" id="node11" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_intentionally_constructed_object.html" title=" " alt="" coords="1077,107,1316,149"/>
+<area shape="rect" id="node6" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_spatio_temporal_extent.html" title=" " alt="" coords="527,75,757,117"/>
+<area shape="rect" id="node7" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_thing.html" title=" " alt="" coords="252,83,479,109"/>
+<area shape="rect" id="node8" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_top.html" title=" " alt="" coords="5,83,204,109"/>
+<area shape="rect" id="node10" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_socially_constructed_object.html" title=" " alt="" coords="1381,107,1605,149"/>
+</map>

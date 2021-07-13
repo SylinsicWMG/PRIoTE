@@ -1,0 +1,11 @@
+<map id="uk.gov.gchq.hqdm.model.impl.PhysicalObjectImpl" name="uk.gov.gchq.hqdm.model.impl.PhysicalObjectImpl">
+<area shape="rect" id="node1" title=" " alt="" coords="1672,35,1895,76"/>
+<area shape="rect" id="node2" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_hqdm_object.html" title=" " alt="" coords="809,5,1025,47"/>
+<area shape="rect" id="node3" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_thing.html" title=" " alt="" coords="252,42,479,69"/>
+<area shape="rect" id="node8" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_spatio_temporal_extent.html" title=" " alt="" coords="527,64,757,105"/>
+<area shape="rect" id="node4" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_top.html" title=" " alt="" coords="5,42,204,69"/>
+<area shape="rect" id="node5" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_physical_object.html" title=" " alt="" coords="1380,64,1624,105"/>
+<area shape="rect" id="node6" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_individual.html" title=" " alt="" coords="1077,67,1332,94"/>
+<area shape="rect" id="node7" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state.html" title=" " alt="" coords="805,71,1029,98"/>
+<area shape="rect" id="node9" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_physical_object.html" title=" " alt="" coords="1093,119,1317,160"/>
+</map>

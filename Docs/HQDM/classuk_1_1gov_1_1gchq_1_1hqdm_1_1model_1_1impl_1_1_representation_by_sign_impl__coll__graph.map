@@ -1,0 +1,13 @@
+<map id="uk.gov.gchq.hqdm.model.impl.RepresentationBySignImpl" name="uk.gov.gchq.hqdm.model.impl.RepresentationBySignImpl">
+<area shape="rect" id="node1" title=" " alt="" coords="2065,49,2288,91"/>
+<area shape="rect" id="node2" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_hqdm_object.html" title=" " alt="" coords="1439,5,1655,47"/>
+<area shape="rect" id="node3" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_thing.html" title=" " alt="" coords="252,79,479,106"/>
+<area shape="rect" id="node9" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_spatio_temporal_extent.html" title=" " alt="" coords="527,72,757,113"/>
+<area shape="rect" id="node4" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_top.html" title=" " alt="" coords="5,121,204,147"/>
+<area shape="rect" id="node11" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_participant_in_activity_or_association.html" title=" " alt="" coords="805,156,1064,197"/>
+<area shape="rect" id="node5" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_representation_by_sign.html" title=" " alt="" coords="1728,79,2017,120"/>
+<area shape="rect" id="node6" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_association.html" title=" " alt="" coords="1415,111,1680,138"/>
+<area shape="rect" id="node7" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_individual.html" title=" " alt="" coords="1112,59,1367,86"/>
+<area shape="rect" id="node8" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state.html" title=" " alt="" coords="823,79,1047,106"/>
+<area shape="rect" id="node10" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_association.html" title=" " alt="" coords="1127,111,1351,152"/>
+</map>

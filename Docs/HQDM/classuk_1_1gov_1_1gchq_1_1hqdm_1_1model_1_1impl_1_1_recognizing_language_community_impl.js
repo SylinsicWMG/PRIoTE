@@ -1,0 +1,4 @@
+var classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_recognizing_language_community_impl =
+[
+    [ "RecognizingLanguageCommunityImpl", "classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_recognizing_language_community_impl.html#a5dd5e1a3e23c486b19043ec48d2ddb57", null ]
+];

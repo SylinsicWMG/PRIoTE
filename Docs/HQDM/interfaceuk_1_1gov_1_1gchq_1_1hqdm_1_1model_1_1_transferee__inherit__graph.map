@@ -1,0 +1,13 @@
+<map id="uk.gov.gchq.hqdm.model.Transferee" name="uk.gov.gchq.hqdm.model.Transferee">
+<area shape="rect" id="node1" title=" " alt="" coords="120,676,379,703"/>
+<area shape="rect" id="node11" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_transferee_impl.html" title=" " alt="" coords="138,751,361,792"/>
+<area shape="rect" id="node2" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_party.html" title=" " alt="" coords="63,587,287,628"/>
+<area shape="rect" id="node3" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_system.html" title=" " alt="" coords="5,497,229,539"/>
+<area shape="rect" id="node4" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_ordinary_physical_object.html" title=" " alt="" coords="63,408,287,449"/>
+<area shape="rect" id="node5" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_physical_object.html" title=" " alt="" coords="137,319,361,360"/>
+<area shape="rect" id="node10" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_participant.html" title=" " alt="" coords="253,505,512,531"/>
+<area shape="rect" id="node6" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state.html" title=" " alt="" coords="137,244,361,271"/>
+<area shape="rect" id="node7" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_spatio_temporal_extent.html" title=" " alt="" coords="134,155,365,196"/>
+<area shape="rect" id="node8" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_thing.html" title=" " alt="" coords="136,80,363,107"/>
+<area shape="rect" id="node9" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_top.html" title=" " alt="" coords="150,5,349,32"/>
+</map>

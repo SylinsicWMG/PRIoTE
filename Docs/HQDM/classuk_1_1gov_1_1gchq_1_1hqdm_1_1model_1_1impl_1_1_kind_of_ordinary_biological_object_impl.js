@@ -1,0 +1,4 @@
+var classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_kind_of_ordinary_biological_object_impl =
+[
+    [ "KindOfOrdinaryBiologicalObjectImpl", "classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_kind_of_ordinary_biological_object_impl.html#a7180328ca59ed4a23b010a1c8b9f252d", null ]
+];

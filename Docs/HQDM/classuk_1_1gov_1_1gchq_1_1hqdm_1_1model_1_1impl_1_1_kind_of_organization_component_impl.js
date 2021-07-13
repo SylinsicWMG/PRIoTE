@@ -1,0 +1,4 @@
+var classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_kind_of_organization_component_impl =
+[
+    [ "KindOfOrganizationComponentImpl", "classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_kind_of_organization_component_impl.html#a20b69eb77ff7834f1f1bcaee36550a7e", null ]
+];

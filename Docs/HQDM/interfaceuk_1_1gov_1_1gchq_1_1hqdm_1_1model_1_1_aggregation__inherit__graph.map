@@ -1,0 +1,12 @@
+<map id="uk.gov.gchq.hqdm.model.Aggregation" name="uk.gov.gchq.hqdm.model.Aggregation">
+<area shape="rect" id="node1" title=" " alt="" coords="1137,75,1407,102"/>
+<area shape="rect" id="node6" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_composition.html" title=" " alt="" coords="1455,46,1727,73"/>
+<area shape="rect" id="node10" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_aggregation_impl.html" title=" " alt="" coords="1479,97,1702,139"/>
+<area shape="rect" id="node2" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_relationship.html" title=" " alt="" coords="819,75,1089,102"/>
+<area shape="rect" id="node3" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_abstract_object.html" title=" " alt="" coords="527,68,771,109"/>
+<area shape="rect" id="node4" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_thing.html" title=" " alt="" coords="252,75,479,102"/>
+<area shape="rect" id="node5" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_top.html" title=" " alt="" coords="5,75,204,102"/>
+<area shape="rect" id="node7" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_temporal_composition.html" title=" " alt="" coords="1775,5,2025,47"/>
+<area shape="rect" id="node9" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_composition_impl.html" title=" " alt="" coords="1789,71,2011,112"/>
+<area shape="rect" id="node8" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_temporal_composition_impl.html" title=" " alt="" coords="2073,5,2296,47"/>
+</map>

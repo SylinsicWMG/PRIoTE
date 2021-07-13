@@ -1,0 +1,4 @@
+var classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_acceptance_of_offer_for_goods_impl =
+[
+    [ "AcceptanceOfOfferForGoodsImpl", "classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_acceptance_of_offer_for_goods_impl.html#a4c4159498230f53e59a7f9bdbd08b9ea", null ]
+];

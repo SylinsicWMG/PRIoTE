@@ -1,0 +1,12 @@
+<map id="uk.gov.gchq.hqdm.model.StateOfSign" name="uk.gov.gchq.hqdm.model.StateOfSign">
+<area shape="rect" id="node1" title=" " alt="" coords="127,497,351,539"/>
+<area shape="rect" id="node8" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_sign.html" title=" " alt="" coords="7,594,226,621"/>
+<area shape="rect" id="node10" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_state_of_sign_impl.html" title=" " alt="" coords="251,587,473,628"/>
+<area shape="rect" id="node2" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_socially_constructed_object.html" title=" " alt="" coords="127,408,351,449"/>
+<area shape="rect" id="node3" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_intentionally_constructed_object.html" title=" " alt="" coords="120,319,359,360"/>
+<area shape="rect" id="node4" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state.html" title=" " alt="" coords="127,244,351,271"/>
+<area shape="rect" id="node5" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_spatio_temporal_extent.html" title=" " alt="" coords="124,155,355,196"/>
+<area shape="rect" id="node6" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_thing.html" title=" " alt="" coords="126,80,353,107"/>
+<area shape="rect" id="node7" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_top.html" title=" " alt="" coords="140,5,339,32"/>
+<area shape="rect" id="node9" href="$classuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1impl_1_1_sign_impl.html" title=" " alt="" coords="5,676,228,717"/>
+</map>

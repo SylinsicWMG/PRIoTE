@@ -1,0 +1,9 @@
+<map id="uk.gov.gchq.hqdm.model.PhysicalObject" name="uk.gov.gchq.hqdm.model.PhysicalObject">
+<area shape="rect" id="node1" title=" " alt="" coords="143,408,387,449"/>
+<area shape="rect" id="node2" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_individual.html" title=" " alt="" coords="5,326,260,353"/>
+<area shape="rect" id="node3" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state.html" title=" " alt="" coords="153,244,377,271"/>
+<area shape="rect" id="node7" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_state_of_physical_object.html" title=" " alt="" coords="285,319,509,360"/>
+<area shape="rect" id="node4" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_spatio_temporal_extent.html" title=" " alt="" coords="149,155,380,196"/>
+<area shape="rect" id="node5" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1model_1_1_thing.html" title=" " alt="" coords="151,80,378,107"/>
+<area shape="rect" id="node6" href="$interfaceuk_1_1gov_1_1gchq_1_1hqdm_1_1pojo_1_1_top.html" title=" " alt="" coords="165,5,364,32"/>
+</map>
