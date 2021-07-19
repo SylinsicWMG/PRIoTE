@@ -377,6 +377,24 @@ public final class MagmaCore {
 
 ---
 
+## Database Interaction
+
+To interact with the database, utilising the default hosting method of a [Fuseki Service](https://jena.apache.org/documentation/fuseki2/)  on port 3330 interacting with [TDB2](https://jena.apache.org/documentation/tdb2/index.html), we can use [sparql query language](https://www.w3.org/TR/rdf-sparql-query/). By default the database exists at `/tdb/` however, this can change dependent on one's implementation decisions. At this directory, there exists several endpoints for sparql interactions:
+|Description                            |URL                             |Method(s)        |
+|---------------------------------------|--------------------------------|-----------------|
+|SPARQL Query                           |http://localhost:3330/tdb/query |GET,POST         |
+|SPARQL Query                           |http://localhost:3330/tdb/sparql|GET,POST         |
+|SPARQL Update                          |http://localhost:3330/tdb/update|POST,PATCH       |
+|File Upload                            |http://localhost:3330/tdb/update|POST,PATCH       |
+|GSP (Graph Store Protocol) read-write  |http://localhost:3330/tdb/data  |GET,HEAD,PUT,POST|
+|Read-write quads                       |http://localhost:3330/tdb       |GET,HEAD,PUT,POST|
+
+Source: https://jena.apache.org/documentation/fuseki2/fuseki-embedded.html#example-1
+
+
+
+---
+
 ## License
 
 HQDM and MagmaCore are accessed under the GCHQ Contributor Licence Agreement. These projects were developed by GCHQ and are not my own.
