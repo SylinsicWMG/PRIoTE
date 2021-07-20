@@ -2,10 +2,10 @@ FROM maven:3.8.1-openjdk-15
 
 EXPOSE 3330
 
-COPY files/ /usr/src/mymaven
-RUN mv files/CustomJava/ /usr/src/mymaven/MagmaCore/src/main/java/ || :
-
 WORKDIR /usr/src/mymaven
+
+COPY files/ /usr/src/mymaven
+RUN cp -r CustomJava/* MagmaCore/src/main/java && rm -rf CustomJava || :
 
 ENV JAVA_HOME=/usr/java/openjdk-15
 ENV JAVA_VERSION=15.0.2
