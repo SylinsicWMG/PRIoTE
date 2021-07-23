@@ -14,11 +14,13 @@
 
 package uk.sylinsic.custom;
 
+import java.io.FileWriter;
+
 import org.apache.jena.fuseki.main.FusekiServer;
 import org.apache.jena.fuseki.system.FusekiLogging;
+import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.Dataset;
 
-import uk.gov.gchq.hqdm.iri.IriBase;
 import uk.gov.gchq.magmacore.database.MagmaCoreJenaDatabase;
 
 /**
@@ -50,26 +52,25 @@ public final class Custom {
     public void run(final String location, final int port) {
         // Create/Connect to persistent database stored at `location`, hosting the server on port `port`
         final MagmaCoreJenaDatabase db = new MagmaCoreJenaDatabase("/usr/src/mymaven/data/".concat(location));
-        
-        final IriBase magmardl_base =
-        new IriBase("magmardl", "http://www.semanticweb.org/magma-core/rdl#");
-        db.register(magmardl_base);
-        
-        final IriBase magmauser_base =
-        new IriBase("magmauser", "http://www.semanticweb.org/magma-core/user#");
-        db.register(magmauser_base);
-        
-        final IriBase hqdm_base = 
-        new IriBase("hqdm", "http://www.semanticweb.org/hqdm#");
-        db.register(hqdm_base);
+        final OntModel ontology = CustomOntology.buildOntology();
+    
+        final String graph = "http://www.semanticweb.org/heating_system";
+
+        try {
+            final FileWriter output = new FileWriter("/tmp/ontology.owl");
+            ontology.write(output, "RDF/XML");
+            output.close();    
+        } catch (final Exception e) {
+            System.out.println(e);
+        }    
 
         // If db is not already populated, create set of example data objects to store in db.
         db.begin();
         if (db.getDataset().isEmpty()) {
             // Build example data objects Dataset.
-            final Dataset objects = CustomDataset.buildDataset();
+            final Dataset objects = CustomDataset.buildDataset(ontology);
 
-            db.getDataset().addNamedModel(hqdm_base.getNamespace(), objects.getDefaultModel());
+            db.getDataset().addNamedModel(graph, objects.getDefaultModel());
             db.commit();
         } else {
             db.abort();
@@ -78,11 +79,13 @@ public final class Custom {
         final FusekiServer server = FusekiServer
                 .create()
                 .port(port)
-                .add("/".concat(location), db.getDataset(), true).build();
+                .add("/".concat(location), db.getDataset(), true)
+                .add("/rw/".concat(location), db.getDataset())
+                .build();
         FusekiLogging.setLogging();
         server.start();
     }
-
+    
     /**
      * Run the custom Fuseki Server.
      */

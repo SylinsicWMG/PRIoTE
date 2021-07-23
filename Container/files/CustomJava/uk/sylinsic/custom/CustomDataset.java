@@ -63,20 +63,29 @@ public final class CustomDataset {
     private CustomDataset() {}
 
     /**
-     * Creates and populates a Jena dataset with the custom data objects.
+     * Creates and populates a Jena dataset with the custom data objects based on ontology.
      *
+     * @param model represents the ontological model to base the dataset off.
      * @return The populated Jena dataset.
      */
-    public static final Dataset buildDataset() {
-        final Model model = ModelFactory.createDefaultModel();
-        
+    public static final Dataset buildDataset(final Model model) {
         createDataObjects().forEach(object -> {
             final Resource resource = model.createResource(object.getIri().toString());
             object.getPredicates()
                     .forEach((iri, predicates) -> predicates.forEach(predicate -> resource
                     .addProperty(model.createProperty(iri.toString()), predicate.toString())));
-        });
+        });            
+
         return DatasetFactory.create(model);
+    }
+
+    /**
+    * Creates and populates a Jena dataset with the custom data objects based on default ontology.
+    *
+    * @return The populated Jena dataset.
+    */
+    public static final Dataset buildDataset() {
+        return buildDataset(ModelFactory.createDefaultModel());
     }
 
     /**
@@ -230,20 +239,16 @@ public final class CustomDataset {
         possibleWorld.addStringValue(ENTITY_NAME, "Example_World");
         objects.add(possibleWorld);
                         
-        // Create the roles for our building, room and componenets
-        final Role buildingRole = new RoleImpl.Builder(new IRI(REF_BASE, uid())).build();
-        buildingRole.addStringValue(ENTITY_NAME, "BUILDING_IN_WORLD_ROLE");
-        
+        // Create the roles for our room and componenets
         final Role roomRole = new RoleImpl.Builder(new IRI(REF_BASE, uid())).build();
-        buildingRole.addStringValue(ENTITY_NAME, "ROOM_IN_BUILDING_ROLE");
+        roomRole.addStringValue(ENTITY_NAME, "ROOM_IN_BUILDING_ROLE");
         
         final Role wallRole = new RoleImpl.Builder(new IRI(REF_BASE, uid())).build();
-        buildingRole.addStringValue(ENTITY_NAME, "WALL_IN_ROOM_ROLE");
+        wallRole.addStringValue(ENTITY_NAME, "WALL_IN_ROOM_ROLE");
         
         final Role heatingSystemRole = new RoleImpl.Builder(new IRI(REF_BASE, uid())).build();
-        buildingRole.addStringValue(ENTITY_NAME, "COMPONENT_OF_HEATING_SYSTEM_ROLE");
+        heatingSystemRole.addStringValue(ENTITY_NAME, "COMPONENT_OF_HEATING_SYSTEM_ROLE");
 
-        objects.add(buildingRole);
         objects.add(roomRole);
         objects.add(wallRole);
         objects.add(heatingSystemRole);
@@ -256,7 +261,6 @@ public final class CustomDataset {
                 .part_Of_Possible_World_M(possibleWorld)
                 .intended_Role_M(domesticPropertyRole)
                 .beginning(buildingConstructionEvent)
-                .intended_Role_M(buildingRole)
                 .build();
         ourBuilding.addStringValue(ENTITY_NAME, "Our_Building");
         objects.add(buildingConstructionEvent);
@@ -274,55 +278,69 @@ public final class CustomDataset {
         objects.add(ourRoom);        
 
         // Create the walls of the building
+        final KindOfFunctionalSystemComponent kindOfDomesticPropertyWall = 
+                new KindOfFunctionalSystemComponentImpl.Builder(
+                        new IRI(USER_BASE, uid()))
+                        .has_Superclass(kindOfFunctionalSystemDomesticPropertyComponent)
+                        .build();
+
         final FunctionalSystemComponent northWall = new FunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(kindOfFunctionalSystemDomesticPropertyComponent)
+                .member_Of_Kind_M(kindOfDomesticPropertyWall)
                 .part_Of_Possible_World_M(possibleWorld)
                 .component_Of_M(ourBuilding)
                 .beginning(buildingConstructionEvent)
                 .intended_Role_M(wallRole)
                 .build();
-        northWall.addStringValue(ENTITY_NAME, "North_Wall_Of_Building");
+        northWall.addStringValue(ENTITY_NAME, "North_Wall_Of_Room");
 
         final FunctionalSystemComponent eastWall = new FunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(kindOfFunctionalSystemDomesticPropertyComponent)
+                .member_Of_Kind_M(kindOfDomesticPropertyWall)
                 .part_Of_Possible_World_M(possibleWorld)
                 .component_Of_M(ourBuilding)
                 .beginning(buildingConstructionEvent)
                 .intended_Role_M(wallRole)
                 .build();
-        eastWall.addStringValue(ENTITY_NAME, "East_Wall_Of_Building");
+        eastWall.addStringValue(ENTITY_NAME, "East_Wall_Of_Room");
 
         final FunctionalSystemComponent southWall = new FunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(kindOfFunctionalSystemDomesticPropertyComponent)
+                .member_Of_Kind_M(kindOfDomesticPropertyWall)
                 .part_Of_Possible_World_M(possibleWorld)
                 .component_Of_M(ourBuilding)
                 .beginning(buildingConstructionEvent)
                 .intended_Role_M(wallRole)
                 .build();
-        southWall.addStringValue(ENTITY_NAME, "South_Wall_Of_Building");
+        southWall.addStringValue(ENTITY_NAME, "South_Wall_Of_Room");
 
         final FunctionalSystemComponent westWall = new FunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(kindOfFunctionalSystemDomesticPropertyComponent)
+                .member_Of_Kind_M(kindOfDomesticPropertyWall)
                 .part_Of_Possible_World_M(possibleWorld)
                 .component_Of_M(ourBuilding)
                 .beginning(buildingConstructionEvent)
                 .intended_Role_M(wallRole)
                 .build();
-        westWall.addStringValue(ENTITY_NAME, "West_Wall_Of_Building");
+        westWall.addStringValue(ENTITY_NAME, "West_Wall_Of_Room");
 
+        objects.add(kindOfDomesticPropertyWall);
         objects.add(northWall);
         objects.add(eastWall);
         objects.add(southWall);
         objects.add(westWall);
 
         // Create our heating components
+
+        final KindOfFunctionalSystemComponent kindOfDomesticPropertyHeatingSystem = 
+                new KindOfFunctionalSystemComponentImpl.Builder(
+                        new IRI(USER_BASE, uid()))
+                        .has_Superclass(kindOfFunctionalSystemDomesticPropertyComponent)
+                        .build();
+                
         final FunctionalSystemComponent radiator = new FunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(kindOfFunctionalSystemDomesticPropertyComponent)
+                .member_Of_Kind_M(kindOfDomesticPropertyHeatingSystem)
                 .part_Of_Possible_World_M(possibleWorld)
                 .component_Of_M(ourBuilding)
                 .beginning(buildingConstructionEvent)
@@ -331,7 +349,7 @@ public final class CustomDataset {
         
         final FunctionalSystemComponent thermostat = new FunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(kindOfFunctionalSystemDomesticPropertyComponent)
+                .member_Of_Kind_M(kindOfDomesticPropertyHeatingSystem)
                 .part_Of_Possible_World_M(possibleWorld)
                 .component_Of_M(ourBuilding)
                 .beginning(buildingConstructionEvent)
@@ -340,13 +358,14 @@ public final class CustomDataset {
             
         final FunctionalSystemComponent boiler = new FunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(kindOfFunctionalSystemDomesticPropertyComponent)
+                .member_Of_Kind_M(kindOfDomesticPropertyHeatingSystem)
                 .part_Of_Possible_World_M(possibleWorld)
                 .component_Of_M(ourBuilding)
                 .beginning(buildingConstructionEvent)
                 .intended_Role_M(heatingSystemRole)
                 .build();
 
+        objects.add(kindOfDomesticPropertyHeatingSystem);
         objects.add(radiator);
         objects.add(thermostat);
         objects.add(boiler);
@@ -368,7 +387,7 @@ public final class CustomDataset {
                 .temporal_Part_Of(thermostat)
                 .beginning(buildingConstructionEvent)
                 .build();
-        stateOfThermostat.addStringValue(ENTITY_NAME, "Thermostat set to heat room to 20 celsius");
+        stateOfThermostat.addStringValue(ENTITY_NAME, "Thermostat set to temperature");
     
         final StateOfFunctionalSystemComponent stateOfBoiler = new StateOfFunctionalSystemComponentImpl.Builder(
                 new IRI(USER_BASE, uid()))
@@ -397,60 +416,160 @@ public final class CustomDataset {
         objects.add(ourPerson);
 
         // Create our states of person
-        final StateOfPerson ourPersonState = new StateOfPersonImpl.Builder(
+        final Event personNoLongerColdEvent = event("2021-07-17T12:00:00", possibleWorld, USER_BASE);
+        final StateOfPerson ourPersonColdState = new StateOfPersonImpl.Builder(
                 new IRI(USER_BASE, uid()))
                 .member_Of(classOfStateOfPerson)
                 .part_Of_Possible_World_M(possibleWorld)
                 .temporal_Part_Of(ourPerson)
                 .beginning(personBirthEvent)
+                .ending(personNoLongerColdEvent)
                 .build();
-        ourPersonState.addStringValue(ENTITY_NAME, "Our person is cold");
-        objects.add(ourPersonState);
+        ourPersonColdState.addStringValue(ENTITY_NAME, "Our person is cold");
+        objects.add(personNoLongerColdEvent);
+        objects.add(ourPersonColdState);
+
+        final StateOfPerson ourPersonWarmState = new StateOfPersonImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of(classOfStateOfPerson)
+                .part_Of_Possible_World_M(possibleWorld)
+                .temporal_Part_Of(ourPerson)
+                .beginning(personNoLongerColdEvent)
+                .build();
+        ourPersonWarmState.addStringValue(ENTITY_NAME, "Our person is warm");
+        objects.add(ourPersonWarmState);
 
         // Create states of house
-        final StateOfFunctionalSystem ourBuildingState = new StateOfFunctionalSystemImpl.Builder(
+        final Event buildingNoLongerColdEvent = event("2021-07-17T11:30:00", possibleWorld, USER_BASE);
+        final StateOfFunctionalSystem ourBuildingColdState = new StateOfFunctionalSystemImpl.Builder(
                 new IRI(USER_BASE, uid()))
                 .member_Of(classOfStateOfFunctionalSystemDomesticProperty)
                 .temporal_Part_Of(ourBuilding)
                 .part_Of_Possible_World_M(possibleWorld)
                 .beginning(buildingConstructionEvent)
+                .ending(buildingNoLongerColdEvent)
                 .build();
-        ourBuildingState.addStringValue(ENTITY_NAME, "Our building is cold");
-        objects.add(ourBuildingState);
+        ourBuildingColdState.addStringValue(ENTITY_NAME, "Our building is cold");
+        objects.add(buildingNoLongerColdEvent);
+        objects.add(ourBuildingColdState);
 
-        // Create associations of states
-        final Participant personParticipant = new ParticipantImpl.Builder(
+        final StateOfFunctionalSystem ourBuildingWarmState = new StateOfFunctionalSystemImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of(classOfStateOfFunctionalSystemDomesticProperty)
+                .temporal_Part_Of(ourBuilding)
+                .part_Of_Possible_World_M(possibleWorld)
+                .beginning(buildingNoLongerColdEvent)
+                .build();
+        ourBuildingWarmState.addStringValue(ENTITY_NAME, "Our building is warm");
+        objects.add(ourBuildingWarmState);
+
+        // Create associations of warmth states
+        //      Cold states
+        final Participant personColdParticipant = new ParticipantImpl.Builder(
                 new IRI(USER_BASE, uid()))
                 .member_Of_Kind_M(occupierOfPropertyRole)
                 .part_Of_Possible_World_M(possibleWorld)
-                .temporal__Part_Of(ourPersonState)
+                .temporal__Part_Of(ourPersonColdState)
                 .beginning(personBirthEvent)
+                .ending(personNoLongerColdEvent)
                 .build();
-        personParticipant.addStringValue(ENTITY_NAME, "State of our person participating in the association");
+        personColdParticipant
+                .addStringValue(ENTITY_NAME, "State of our person being cold participating in an association");
         
-        final Participant buildingParticipant = new ParticipantImpl.Builder(
+        final Participant buildingColdParticipant = new ParticipantImpl.Builder(
                 new IRI(USER_BASE, uid()))
-                .member_Of_Kind_M(domesticOccupantInPropertyRole)
+                .member_Of_Kind_M(domesticPropertyRole)
                 .part_Of_Possible_World_M(possibleWorld)
-                .temporal__Part_Of(ourBuildingState)
-                .beginning(personBirthEvent)
+                .temporal__Part_Of(ourBuildingColdState)
+                .beginning(buildingConstructionEvent)
+                .ending(buildingNoLongerColdEvent)
                 .build();
-        buildingParticipant.addStringValue(ENTITY_NAME, "State of our house participating in the association");
+        buildingColdParticipant
+                .addStringValue(ENTITY_NAME, "State of our house being cold participating in an association");
         
+        //      Warm states
+        final Participant personWarmParticipant = new ParticipantImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of_Kind_M(occupierOfPropertyRole)
+                .part_Of_Possible_World_M(possibleWorld)
+                .temporal__Part_Of(ourPersonWarmState)
+                .beginning(personNoLongerColdEvent)
+                .build();
+        personWarmParticipant
+                .addStringValue(ENTITY_NAME, "State of our person being warm participating in an association");
+        
+        final Participant buildingWarmParticipant = new ParticipantImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of_Kind_M(domesticPropertyRole)
+                .part_Of_Possible_World_M(possibleWorld)
+                .temporal__Part_Of(ourBuildingWarmState)
+                .beginning(buildingNoLongerColdEvent)
+                .build();
+        buildingWarmParticipant
+                .addStringValue(ENTITY_NAME, "State of our house being warm participating in an association");
+        
+        objects.add(personColdParticipant);
+        objects.add(buildingColdParticipant);
+        objects.add(personWarmParticipant);
+        objects.add(buildingWarmParticipant);
 
-        final Association buildingAndPersonCold = new AssociationImpl.Builder(
+        //      Associations of building and person
+        final Association buildingColdPersonColdAssociation = new AssociationImpl.Builder(
                 new IRI(USER_BASE, uid()))
                 .member_Of_Kind_M(occupantInPropertyKindOfAssociation)
-                .consists_Of_Participant(personParticipant)
-                .consists_Of_Participant(buildingParticipant)
+                .consists_Of_Participant(personColdParticipant)
+                .consists_Of_Participant(buildingColdParticipant)
                 .part_Of_Possible_World_M(possibleWorld)
                 .beginning(personBirthEvent)
+                .ending(buildingNoLongerColdEvent)
                 .build();
-        buildingAndPersonCold.addStringValue(ENTITY_NAME, "Both the person is cold and the house is cold.");
+        buildingColdPersonColdAssociation
+                .addStringValue(ENTITY_NAME, "Both the person is cold and the house is cold.");
         
-        objects.add(personParticipant);
-        objects.add(buildingParticipant);
-        objects.add(buildingAndPersonCold);
+        final Association buildingWarmPersonColdAssociation = new AssociationImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of_Kind_M(occupantInPropertyKindOfAssociation)
+                .consists_Of_Participant(personColdParticipant)
+                .consists_Of_Participant(buildingWarmParticipant)
+                .part_Of_Possible_World_M(possibleWorld)
+                .beginning(buildingNoLongerColdEvent)
+                .ending(personNoLongerColdEvent)
+                .build();
+        buildingWarmPersonColdAssociation
+                .addStringValue(ENTITY_NAME, "The person is cold and the house is warm.");
+        
+        final Association buildingWarmPersonWarmAssociation = new AssociationImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of_Kind_M(occupantInPropertyKindOfAssociation)
+                .consists_Of_Participant(personWarmParticipant)
+                .consists_Of_Participant(buildingWarmParticipant)
+                .part_Of_Possible_World_M(possibleWorld)
+                .beginning(personNoLongerColdEvent)
+                .build();
+        buildingWarmPersonWarmAssociation.addStringValue(ENTITY_NAME, "The person is warm and the house is warm.");
+
+
+        objects.add(buildingColdPersonColdAssociation);
+        objects.add(buildingWarmPersonColdAssociation);
+        objects.add(buildingWarmPersonWarmAssociation);
+
+        // Create associations of building parts
+        final Participant roomParticipant = new ParticipantImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of_Kind_M(roomRole)
+                .part_Of_Possible_World_M(possibleWorld)
+                .beginning(buildingConstructionEvent)
+                .build();
+        roomParticipant.addStringValue(ENTITY_NAME, "A room participating in an association");
+
+        final Participant wallParticipant = new ParticipantImpl.Builder(
+                new IRI(USER_BASE, uid()))
+                .member_Of_Kind_M(wallRole)
+                .part_Of_Possible_World_M(possibleWorld)
+                .beginning(buildingConstructionEvent)
+                .build();
+        wallParticipant.addStringValue(ENTITY_NAME, "A wall participating in an association");
+
 
         return objects;
     }
