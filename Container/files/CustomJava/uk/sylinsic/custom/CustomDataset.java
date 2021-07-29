@@ -3,6 +3,7 @@ package uk.sylinsic.custom;
 import static uk.gov.gchq.hqdm.iri.HQDM.ENTITY_NAME;
 import static uk.gov.gchq.hqdm.iri.HQDM.HQDM;
 import static uk.gov.gchq.magmacore.util.DataObjectUtils.REF_BASE;
+import static uk.gov.gchq.magmacore.util.DataObjectUtils.USER_BASE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,16 @@ import org.apache.jena.rdf.model.Resource;
 import uk.gov.gchq.hqdm.iri.HqdmIri;
 import uk.gov.gchq.hqdm.iri.IRI;
 import uk.gov.gchq.hqdm.model.ClassOfPhysicalQuantity;
+import uk.gov.gchq.hqdm.model.IdentificationOfPhysicalQuantity;
 import uk.gov.gchq.hqdm.model.KindOfPhysicalQuantity;
+import uk.gov.gchq.hqdm.model.PhysicalQuantity;
 import uk.gov.gchq.hqdm.model.Scale;
 import uk.gov.gchq.hqdm.model.Thing;
 import uk.gov.gchq.hqdm.model.UnitOfMeasure;
 import uk.gov.gchq.hqdm.model.impl.ClassOfPhysicalQuantityImpl;
+import uk.gov.gchq.hqdm.model.impl.IdentificationOfPhysicalQuantityImpl;
 import uk.gov.gchq.hqdm.model.impl.KindOfPhysicalQuantityImpl;
+import uk.gov.gchq.hqdm.model.impl.PhysicalQuantityImpl;
 import uk.gov.gchq.hqdm.model.impl.ScaleImpl;
 import uk.gov.gchq.hqdm.model.impl.UnitOfMeasureImpl;
 
@@ -1104,6 +1109,222 @@ public final class CustomDataset {
         kilovoltScale.addStringValue(ENTITY_NAME, "KILOVOLT_SCALE");
         objects.add(kilovoltScale);
         // End create electrical potential units
+        
+        // Begin create temperature quantities
+        final PhysicalQuantity roomTempCelsius = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "room_temp_celsius"))
+            .member_Of_Kind_M(kindOfTemperature)
+            .build();
+        roomTempCelsius.addStringValue(ENTITY_NAME, "ROOM_TEMP_CELSIUS");
+        objects.add(roomTempCelsius);
+        
+        final IdentificationOfPhysicalQuantity identificationOfRoomTempCelsius = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_room_temp_celsius"))
+                .represented_M(roomTempCelsius)
+                .uses_M(degreesCelsiusScale)
+                .value__M(21.0)
+                .build();
+        identificationOfRoomTempCelsius.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_ROOM_TEMP_CELSIUS");
+        objects.add(identificationOfRoomTempCelsius);
+        
+        final PhysicalQuantity bodyTempKelvin = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "body_temp_kelvin"))
+            .member_Of_Kind_M(kindOfTemperature)
+            .build();
+        bodyTempKelvin.addStringValue(ENTITY_NAME, "BODY_TEMP_KELVIN");
+        objects.add(bodyTempKelvin);
+
+        final IdentificationOfPhysicalQuantity identificationOfBodyTempKelvin = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_body_temp_kelvin"))
+                .represented_M(bodyTempKelvin)
+                .uses_M(degreesKelvinScale)
+                .value__M(310.15)
+                .build();
+        identificationOfBodyTempKelvin.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_BODY_TEMP_KELVIN");
+        objects.add(identificationOfBodyTempKelvin);
+        // End create temperature quantities
+
+        // Begin create time quantities
+        final PhysicalQuantity averageBlinkTimeMilliseconds = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "average_blink_time_milliseconds"))
+            .member_Of_Kind_M(kindOfTime)
+            .build();
+        averageBlinkTimeMilliseconds.addStringValue(ENTITY_NAME, "AVERAGE_BLINK_TIME_MILLISECONDS");
+        objects.add(averageBlinkTimeMilliseconds);
+
+        final IdentificationOfPhysicalQuantity identificationOfAverageBlinkTimeMilliseconds = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_average_blink_time_milliseconds"))
+                .represented_M(averageBlinkTimeMilliseconds)
+                .uses_M(millisecondScale)
+                .value__M(100)
+                .build();
+        identificationOfAverageBlinkTimeMilliseconds.addStringValue(ENTITY_NAME, 
+            "IDENTIFICATION_OF_AVERAGE_BLINK_TIME_MILLISECONDS");
+        objects.add(identificationOfAverageBlinkTimeMilliseconds);
+
+        final PhysicalQuantity oneHundredMetreRecordSeconds = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "one_hundred_metre_record_seconds"))
+            .member_Of_Kind_M(kindOfTime)
+            .build();
+        oneHundredMetreRecordSeconds.addStringValue(ENTITY_NAME, "ONE_HUNDRED_METRE_RECORD_SECONDS");
+        objects.add(oneHundredMetreRecordSeconds);
+
+        final IdentificationOfPhysicalQuantity identificationOfOneHundredMetreRecordSeconds = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_one_hundred_metre_record_seconds"))
+                .represented_M(oneHundredMetreRecordSeconds)
+                .uses_M(secondScale)
+                .value__M(9.58)
+                .build();
+        identificationOfOneHundredMetreRecordSeconds.addStringValue(ENTITY_NAME, 
+            "IDENTIFICATION_OF_ONE_HUNDRED_METRE_RECORD_SECONDS");
+        objects.add(identificationOfOneHundredMetreRecordSeconds);
+
+        final PhysicalQuantity minimumLengthOfFootballGameMinutes = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "minimum_length_of_football_game_minutes"))
+            .member_Of_Kind_M(kindOfTime)
+            .build();
+        minimumLengthOfFootballGameMinutes.addStringValue(ENTITY_NAME, "MINIMUM_LENGTH_OF_FOOTBALL_GAME_MINUTES");
+        objects.add(minimumLengthOfFootballGameMinutes);
+
+        final IdentificationOfPhysicalQuantity identificationOfMinimumLengthOfFootballGameMinutes = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_minimum_length_of_football_game_minutes"))
+                .represented_M(minimumLengthOfFootballGameMinutes)
+                .uses_M(minuteScale)
+                .value__M(80)
+                .build();
+        identificationOfMinimumLengthOfFootballGameMinutes.addStringValue(ENTITY_NAME, 
+            "IDENTIFICATION_OF_MINIMUM_LENGTH_OF_FOOTBALL_GAME_MINUTES");
+        objects.add(identificationOfMinimumLengthOfFootballGameMinutes);
+
+        final PhysicalQuantity averagePrivatePilotLicenseHours = new PhysicalQuantity.Builder(
+            new IRI(USER_BASE, "average_private_pilot_license_hours"))
+            .member_Of_Kind_M(kindOfTime)
+            .build();
+        averagePrivatePilotLicenseHours.addStringValue(ENTITY_NAME, "AVERAGE_PRIVATE_PILOT_LICENSE_HOURS");
+        objects.add(averagePrivatePilotLicenseHours);
+
+        final IdentificationOfPhysicalQuantity identificationOfAveragePrivatePilotLicenseHours = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_average_private_pilot_license_hours"))
+                .represented_M(averagePrivatePilotLicenseHours)
+                .uses_M(hourScale)
+                .value__M(60)
+                .build();
+        identificationOfAveragePrivatePilotLicenseHours.addStringValue(ENTITY_NAME,
+            "IDENTIFICATION_OF_AVERAGE_PRIVATE_PILOT_LICENSE_HOURS");
+        objects.add(identificationOfAveragePrivatePilotLicenseHours);
+
+        final PhysicalQuantity leapYearDays = new PhysicalQuantity.Builder(
+            new IRI(USER_BASE, "leap_year_days"))
+            .member_Of_Kind_M(kindOfTime)
+            .build();
+        leapYearDays.addStringValue(ENTITY_NAME, "LEAP_YEAR_DAYS");
+        objects.add(leapYearDays);
+
+        final IdentificationOfPhysicalQuantity identificationOfLeapYearDays = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_leap_year_days"))
+                .represented_M(leapYearDays)
+                .uses_M(dayScale)
+                .value__M(366)
+                .build();
+        identificationOfLeapYearDays.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_LEAP_YEAR_DAYS");
+        objects.add(identificationOfLeapYearDays);
+
+        final PhysicalQuantity schoolYearWeeks = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "school_year_weeks"))
+            .member_Of_Kind_M(kindOfTime)
+            .build();
+        schoolYearWeeks.addStringValue(ENTITY_NAME, "SCHOOL_YEAR_WEEKS");
+        objects.add(schoolYearWeeks);
+
+        final IdentificationOfPhysicalQuantity identificationOfSchoolYearWeeks = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_school_year_weeks"))
+                .represented_M(schoolYearWeeks)
+                .uses_M(weekScale)
+                .value__M(39)
+                .build();
+        identificationOfSchoolYearWeeks.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_SCHOOL_YEAR_WEEKS");
+        objects.add(identificationOfSchoolYearWeeks);
+
+        final PhysicalQuantity pregnancyMonths = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "pregnancy_months"))
+            .member_Of_Kind_M(monthScale)
+            .build();
+        pregnancyMonths.addStringValue(ENTITY_NAME, "PREGNANCY_MONTHS");
+        objects.add(pregnancyMonths);
+
+        final IdentificationOfPhysicalQuantity identificationOfPregnancyMonths = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_pregnancy_months"))
+                .represented_M(pregnancyMonths)
+                .uses_M(monthScale)
+                .value__M(9)
+                .build();
+        identificationOfPregnancyMonths.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_PREGNANCY_MONTHS");
+        objects.add(identificationOfPregnancyMonths);
+
+        final PhysicalQuantity sixthFormYears = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "sixth_form_years"))
+            .member_Of_Kind_M(kindOfTime)
+            .build();
+        sixthFormYears.addStringValue(ENTITY_NAME, "SIXTH_FORM_YEARS");
+        objects.add(sixthFormYears);
+
+        final IdentificationOfPhysicalQuantity identificationOfSixthFormYears = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_sixth_form_years"))
+                .represented_M(sixthFormYears)
+                .uses_M(yearScale)
+                .value_M(2)
+                .build();
+        identificationOfSixthFormYears.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_SIXTH_FORM_YEARS");
+        objects.add(identificationOfSixthFormYears);
+        // End create time quantities
+        
+        // Begin create angle quantities
+        final PhysicalQuantity anglesInCircleRadians = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "angles_in_circle_radians"))
+            .member_Of_Kind_M(kindOfAngle)
+            .build();
+        anglesInCircleRadians.addStringValue(ENTITY_NAME, "ANGLES_IN_CIRCLE_RADIANS");
+        objects.add(anglesInCircleRadians);
+
+        final IdentificationOfPhysicalQuantity identificationOfAnglesInCircleRadians = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_angles_in_circle_radians"))
+                .represented_M(anglesInCircleRadians)
+                .uses_M(radianScale)
+                .value_M(6.28)
+                .build();
+        identificationOfAnglesInCircleRadians.addStringValue(ENTITY_NAME, 
+            "IDENTIFICATION_OF_ANGLES_IN_CIRCLES_RADIANS");
+        objects.add(identificationOfAnglesInCircleRadians);
+
+        final PhysicalQuantity anglesInCircleDegrees = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "angles_in_circle_degrees"))
+            .member_Of_Kind_M(kindOfAngle)
+            .build();
+        anglesInCircleDegrees.addStringValue(ENTITY_NAME, "ANGLES_IN_CIRCLE_DEGREES");
+        objects.add(anglesInCircleDegrees);
+
+        final IdentificationOfPhysicalQuantity identificationOfAnglesInCircleDegrees = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "identification_of_angles_in_circle_degrees"))
+                .represented_M(anglesInCircleDegrees)
+                .uses_M(degreeScale)
+                .value_M(360)
+                .build();
+        identificationOfAnglesInCircleDegrees.addStringValue(ENTITY_NAME,
+            "IDENTIFICATION_OF_ANGLES_IN_CIRCLE_DEGREES");
+        objects.add(identificationOfAnglesInCircleDegrees);
+        // End create angle quantities
         return objects;
     }
                     
