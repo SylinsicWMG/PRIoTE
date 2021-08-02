@@ -145,6 +145,13 @@ public final class CustomDataset {
         kindOfTemperature.addStringValue(ENTITY_NAME, "KIND_OF_TEMPERATURE");
         objects.add(kindOfTemperature);
 
+        final PhysicalQuantity temperature = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "temperature"))
+            .member_Of_Kind_M(kindOfTemperature)
+            .build();
+        temperature.addStringValue(ENTITY_NAME, "TEMPERATURE");
+        objects.add(temperature);
+        
         final UnitOfMeasure degreesCelsiusUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "degrees_celsius_unit"))
             .member__Of(classOfDerivedSiUnits)
@@ -178,13 +185,20 @@ public final class CustomDataset {
         objects.add(degreesKelvinScale);
         // End create temperature units
 
-        // Begin create time units
-        final KindOfPhysicalQuantity kindOfTime = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_time"))
+        // Begin create duration units
+        final KindOfPhysicalQuantity kindOfDuration = new KindOfPhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "kind_of_duration"))
             .member_Of(classOfUnits)
             .build();
-        kindOfTime.addStringValue(ENTITY_NAME, "KIND_OF_TIME");
-        objects.add(kindOfTime);
+        kindOfDuration.addStringValue(ENTITY_NAME, "KIND_OF_DURATION");
+        objects.add(kindOfDuration);
+
+        final PhysicalQuantity duration = new PhysicalQuantityImpl.Builder(
+            new IRI(USER_BASE, "duration"))
+            .member_Of_Kind_M(kindOfDuration)
+            .build();
+        duration.addStringValue(ENTITY_NAME, "DURATION");
+        objects.add(duration);
 
         final UnitOfMeasure millisecondUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "millisecond_unit"))
@@ -195,7 +209,7 @@ public final class CustomDataset {
 
         final Scale millisecondScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "millisecond_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfMetricUnits)
             .unit(millisecondUnit)
             .build();
@@ -211,7 +225,7 @@ public final class CustomDataset {
 
         final Scale secondScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "second_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfBaseSiUnits)
             .unit(secondUnit)
             .build();
@@ -227,7 +241,7 @@ public final class CustomDataset {
 
         final Scale minuteScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "minute_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(minuteUnit)
             .build();
@@ -243,7 +257,7 @@ public final class CustomDataset {
         
         final Scale hourScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "hour_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(hourUnit)
             .build();
@@ -259,7 +273,7 @@ public final class CustomDataset {
         
         final Scale dayScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "day_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfMetricUnits)
             .unit(dayUnit)
             .build();
@@ -275,7 +289,7 @@ public final class CustomDataset {
         
         final Scale weekScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "week_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(weekUnit)
             .build();
@@ -291,7 +305,7 @@ public final class CustomDataset {
         
         final Scale monthScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "month_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(monthUnit)
             .build();
@@ -307,7 +321,7 @@ public final class CustomDataset {
         
         final Scale yearScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "year_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(yearUnit)
             .build();
@@ -323,6 +337,13 @@ public final class CustomDataset {
         kindOfAngle.addStringValue(ENTITY_NAME, "KIND_OF_ANGLE");
         objects.add(kindOfAngle);
 
+        final PhysicalQuantity angle = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "angle"))
+            .member_Of_Kind_M(kindOfAngle)
+            .build();
+        angle.addStringValue(ENTITY_NAME, "ANGLE");
+        objects.add(angle);
+
         final UnitOfMeasure radianUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "radian_unit"))
             .member__Of(classOfDerivedSiUnits)
@@ -332,7 +353,7 @@ public final class CustomDataset {
 
         final Scale radianScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "radian_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfDerivedSiUnits)
             .unit(radianUnit)
             .build();
@@ -348,7 +369,7 @@ public final class CustomDataset {
 
         final Scale degreeScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "degree_scale"))
-            .domain_M(kindOfTime)
+            .domain_M(kindOfDuration)
             .member__Of(classOfMetricUnits)
             .unit(degreeUnit)
             .build();
@@ -364,6 +385,13 @@ public final class CustomDataset {
         kindOfDistance.addStringValue(ENTITY_NAME, "KIND_OF_DISTANCE");
         objects.add(kindOfDistance);
 
+        final PhysicalQuantity distance = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "distance"))
+            .member_Of_Kind_M(kindOfDistance)
+            .build();
+        distance.addStringValue(ENTITY_NAME, "DISTANCE");
+        objects.add(distance);
+ 
         // Metric measurements
         final UnitOfMeasure millimetreUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "millimetre_unit"))
@@ -519,135 +547,126 @@ public final class CustomDataset {
         kindOfArea.addStringValue(ENTITY_NAME, "KIND_OF_AREA");
         objects.add(kindOfArea);
                 
+        final PhysicalQuantity area = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "area"))
+            .member_Of_Kind_M(kindOfArea)
+            .build();
+        area.addStringValue(ENTITY_NAME, "area");
+        objects.add(area);
+
         // Metric units
-        final UnitOfMeasure millimetreSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "millimetre_squared_unit"))
+        final UnitOfMeasure squareCentimetreUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "square_centimetre_unit"))
             .member__Of(classOfMetricUnits)
             .build();
-        millimetreSquaredUnit.addStringValue(ENTITY_NAME, "MILLIMETRE_SQUARED_UNIT");
-        objects.add(millimetreSquaredUnit);
+        squareCentimetreUnit.addStringValue(ENTITY_NAME, "SQUARE_CENTIMETRE_UNIT");
+        objects.add(squareCentimetreUnit);
 
-        final Scale millimetreSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "millimetre_squared_scale"))
+        final Scale squareCentimetreScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "square_centimetre_scale"))
             .domain_M(kindOfArea)
             .member__Of(classOfMetricUnits)
-            .unit(millimetreSquaredUnit)
+            .unit(squareCentimetreUnit)
             .build(); 
-        millimetreSquaredScale.addStringValue(ENTITY_NAME, "MILLIMETRE_SQUARED_SCALE");
-        objects.add(millimetreSquaredScale);
+        squareCentimetreScale.addStringValue(ENTITY_NAME, "SQUARE_CENTIMETRE_SCALE");
+        objects.add(squareCentimetreScale);
 
-        final UnitOfMeasure centimetreSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "centimetre_squared_unit"))
+        final UnitOfMeasure squareMetreUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "square_metre_unit"))
             .member__Of(classOfMetricUnits)
             .build();
-        centimetreSquaredUnit.addStringValue(ENTITY_NAME, "CENTIMETRE_SQUARED_UNIT");
-        objects.add(centimetreSquaredUnit);
+        squareMetreUnit.addStringValue(ENTITY_NAME, "SQUARE_METRE_UNIT");
+        objects.add(squareMetreUnit);
 
-        final Scale centimetreSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "centimetre_squared_scale"))
-            .domain_M(kindOfArea)
-            .member__Of(classOfMetricUnits)
-            .unit(centimetreSquaredUnit)
-            .build(); 
-        centimetreSquaredScale.addStringValue(ENTITY_NAME, "CENTIMETRE_SQUARED_SCALE");
-        objects.add(centimetreSquaredScale);
-
-        final UnitOfMeasure metreSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "metre_squared_unit"))
-            .member__Of(classOfMetricUnits)
-            .build();
-        metreSquaredUnit.addStringValue(ENTITY_NAME, "METRE_SQUARED_UNIT");
-        objects.add(metreSquaredUnit);
-
-        final Scale metreSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "metre_squared_scale"))
+        final Scale squareMetreScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "square_metre_scale"))
             .domain_M(kindOfArea)
             .member__Of(classOfDerivedSiUnits)
-            .unit(metreSquaredUnit)
+            .unit(squareMetreUnit)
             .build(); 
-        metreSquaredScale.addStringValue(ENTITY_NAME, "METRE_SQUARED_SCALE");
-        objects.add(metreSquaredScale);
+        squareMetreScale.addStringValue(ENTITY_NAME, "SQUARE_METRE_SCALE");
+        objects.add(squareMetreScale);
 
-        final UnitOfMeasure kilometreSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "kilometre_squared_unit"))
+        final UnitOfMeasure squareKilometreUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "square_kilometre_unit"))
             .member__Of(classOfMetricUnits)
             .build();
-        kilometreSquaredUnit.addStringValue(ENTITY_NAME, "KILOMETRE_SQUARED_UNIT");
-        objects.add(kilometreSquaredUnit);
+        squareKilometreUnit.addStringValue(ENTITY_NAME, "SQUARE_KILOMETRE_UNIT");
+        objects.add(squareKilometreUnit);
 
-        final Scale kilometreSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "kilometre_squared_scale"))
+        final Scale squareKilometreScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "square_kilometre_scale"))
             .domain_M(kindOfArea)
             .member__Of(classOfMetricUnits)
-            .unit(kilometreSquaredUnit)
+            .unit(squareKilometreUnit)
             .build(); 
-        kilometreSquaredScale.addStringValue(ENTITY_NAME, "KILOMETRE_SQUARED_SCALE");
-        objects.add(kilometreSquaredScale);
+        squareKilometreScale.addStringValue(ENTITY_NAME, "SQUARE_KILOMETRE_SCALE");
+        objects.add(squareKilometreScale);
 
         // Imperial units
-        final UnitOfMeasure inchSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "inch_squared_unit"))
+        final UnitOfMeasure squareInchUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "square_inch_unit"))
             .member__Of(classOfImperialUnits)
             .build();
-        inchSquaredUnit.addStringValue(ENTITY_NAME, "INCH_SQUARED_UNIT");
-        objects.add(inchSquaredUnit);
+        squareInchUnit.addStringValue(ENTITY_NAME, "SQUARE_INCH_UNIT");
+        objects.add(squareInchUnit);
 
-        final Scale inchSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "inch_squared_scale"))
+        final Scale squareInchScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "square_inch_scale"))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
-            .unit(inchSquaredUnit)
+            .unit(squareInchUnit)
             .build();
-        inchSquaredScale.addStringValue(ENTITY_NAME, "INCH_SQUARED_SCALE");
-        objects.add(inchSquaredScale);
+        squareInchScale.addStringValue(ENTITY_NAME, "SQUARE_INCH_SCALE");
+        objects.add(squareInchScale);
 
-        final UnitOfMeasure footSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "foot_squared_unit"))
+        final UnitOfMeasure squareFootUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "square_foot_unit"))
             .member__Of(classOfImperialUnits)
             .build();
-        footSquaredUnit.addStringValue(ENTITY_NAME, "FOOT_SQUARED_UNIT");
-        objects.add(footSquaredUnit);
+        squareFootUnit.addStringValue(ENTITY_NAME, "SQUARE_FOOT_UNIT");
+        objects.add(squareFootUnit);
 
-        final Scale footSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "foot_squared_scale"))
+        final Scale squareFootScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "square_foot_scale"))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
-            .unit(footSquaredUnit)
+            .unit(squareFootUnit)
             .build();
-        footSquaredScale.addStringValue(ENTITY_NAME, "FOOT_SQUARED_SCALE");
-        objects.add(footSquaredScale);
+        squareFootScale.addStringValue(ENTITY_NAME, "SQUARE_FOOT_SCALE");
+        objects.add(squareFootScale);
 
-        final UnitOfMeasure yardSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "yard_squared_unit"))
+        final UnitOfMeasure squareYardUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "square_yard_unit"))
             .member__Of(classOfImperialUnits)
             .build();
-        yardSquaredUnit.addStringValue(ENTITY_NAME, "YARD_SQUARED_UNIT");
-        objects.add(yardSquaredUnit);
+        squareYardUnit.addStringValue(ENTITY_NAME, "SQUARE_YARD_UNIT");
+        objects.add(squareYardUnit);
 
-        final Scale yardSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "yard_squared_scale"))
+        final Scale squareYardScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "square_yard_scale"))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
-            .unit(yardSquaredUnit)
+            .unit(squareYardUnit)
             .build();
-        yardSquaredScale.addStringValue(ENTITY_NAME, "YARD_SQUARED_SCALE");
-        objects.add(yardSquaredScale);
+        squareYardScale.addStringValue(ENTITY_NAME, "SQUARE_YARD_SCALE");
+        objects.add(squareYardScale);
 
-        final UnitOfMeasure mileSquaredUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "mile_squared_unit"))
+        final UnitOfMeasure squareMileUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "square_mile_unit"))
             .member__Of(classOfImperialUnits)
             .build();
-        mileSquaredUnit.addStringValue(ENTITY_NAME, "MILE_SQUARED_UNIT");
-        objects.add(mileSquaredUnit);
+        squareMileUnit.addStringValue(ENTITY_NAME, "SQUARE_MILE_UNIT");
+        objects.add(squareMileUnit);
 
-        final Scale mileSquaredScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "mile_squared_scale"))
+        final Scale squareMileScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "square_mile_scale"))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
-            .unit(mileSquaredUnit)
+            .unit(squareMileUnit)
             .build();
-        mileSquaredScale.addStringValue(ENTITY_NAME, "MILE_SQUARED_SCALE");
-        objects.add(mileSquaredScale);
+        squareMileScale.addStringValue(ENTITY_NAME, "SQUARE_MILE_SCALE");
+        objects.add(squareMileScale);
 
         final UnitOfMeasure acreUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "acre_unit"))
@@ -673,90 +692,97 @@ public final class CustomDataset {
             .build();
         kindOfVolume.addStringValue(ENTITY_NAME, "KIND_OF_VOLUME");
         objects.add(kindOfVolume);
+        
+        final PhysicalQuantity volume = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "volume"))
+            .member_Of_Kind_M(kindOfVolume)
+            .build();
+        volume.addStringValue(ENTITY_NAME, "VOLUME");
+        objects.add(volume);
 
         // Metric units
-        final UnitOfMeasure centimetreCubedUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "centimetre_cubed_unit"))
+        final UnitOfMeasure cubicCentimetreUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "cubic_centimetre_unit"))
             .member__Of(classOfMetricUnits)
             .build();
-        centimetreCubedUnit.addStringValue(ENTITY_NAME, "CENTIMETRE_CUBED_UNIT");
-        objects.add(centimetreCubedUnit);
+        cubicCentimetreUnit.addStringValue(ENTITY_NAME, "CUBIC_CENTIMETRE_UNIT");
+        objects.add(cubicCentimetreUnit);
 
-        final Scale centimetreCubedScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "centimetre_cubed_scale"))
+        final Scale cubicCentimetreScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "cubic_centimetre_scale"))
             .domain_M(kindOfVolume)
             .member__Of(classOfMetricUnits)
-            .unit(centimetreCubedUnit)
+            .unit(cubicCentimetreUnit)
             .build();
-        centimetreCubedScale.addStringValue(ENTITY_NAME, "CENTIMETRE_CUBED_SCALE");
-        centimetreCubedScale.addStringValue(equivalentTo, "MILLILITRE");
-        objects.add(centimetreCubedScale);
+        cubicCentimetreScale.addStringValue(ENTITY_NAME, "CUBIC_CENTIMETRE_SCALE");
+        cubicCentimetreScale.addStringValue(equivalentTo, "MILLILITRE");
+        objects.add(cubicCentimetreScale);
 
-        final UnitOfMeasure decimetreCubedUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "decimetre_cubed_unit"))
+        final UnitOfMeasure cubicDecimetreUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "cubic_decimetre_unit"))
             .member__Of(classOfMetricUnits)
             .build();
-        decimetreCubedUnit.addStringValue(ENTITY_NAME, "DECIMETRE_CUBED_UNIT");
-        objects.add(decimetreCubedUnit);
+        cubicDecimetreUnit.addStringValue(ENTITY_NAME, "CUBIC_DECIMETRE_UNIT");
+        objects.add(cubicDecimetreUnit);
 
-        final Scale decimetreCubedScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "decimetre_cubed_scale"))
+        final Scale cubicDecimetreScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "cubic_decimetre_scale"))
             .domain_M(kindOfVolume)
             .member__Of(classOfMetricUnits)
-            .unit(decimetreCubedUnit)
+            .unit(cubicDecimetreUnit)
             .build();
-        decimetreCubedScale.addStringValue(ENTITY_NAME, "DECIMETRE_CUBED_SCALE");
-        decimetreCubedScale.addStringValue(equivalentTo, "LITRE");
-        objects.add(decimetreCubedScale);
+        cubicDecimetreScale.addStringValue(ENTITY_NAME, "CUBIC_DECIMETRE_SCALE");
+        cubicDecimetreScale.addStringValue(equivalentTo, "LITRE");
+        objects.add(cubicDecimetreScale);
         
-        final UnitOfMeasure metreCubedUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "metre_cubed_unit"))
+        final UnitOfMeasure cubicMetreUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "cubic_metre_unit"))
             .member__Of(classOfMetricUnits)
             .build();
-        metreCubedUnit.addStringValue(ENTITY_NAME, "METRE_CUBED_UNIT");
-        objects.add(metreCubedUnit);
+        cubicMetreUnit.addStringValue(ENTITY_NAME, "CUBIC_METRE_UNIT");
+        objects.add(cubicMetreUnit);
 
-        final Scale metreCubedScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "metre_cubed_scale"))
+        final Scale cubicMetreScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "cubic_metre_scale"))
             .domain_M(kindOfVolume)
             .member__Of(classOfDerivedSiUnits)
             .build();
-        metreCubedScale.addStringValue(ENTITY_NAME, "METRE_CUBED_SCALE");
-        metreCubedScale.addStringValue(equivalentTo, "KILOLITRE");
-        objects.add(metreCubedScale);
+        cubicMetreScale.addStringValue(ENTITY_NAME, "CUBIC_METRE_SCALE");
+        cubicMetreScale.addStringValue(equivalentTo, "KILOLITRE");
+        objects.add(cubicMetreScale);
 
         // Imperial units
-        final UnitOfMeasure inchCubedUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "inch_cubed_unit"))
+        final UnitOfMeasure cubicInchUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "cubic_inch_unit"))
             .member__Of(classOfImperialUnits)
             .build();
-        inchCubedUnit.addStringValue(ENTITY_NAME, "INCH_CUBED_UNIT");
-        objects.add(inchCubedUnit);
+        cubicInchUnit.addStringValue(ENTITY_NAME, "CUBIC_INCH_UNIT");
+        objects.add(cubicInchUnit);
 
-        final Scale inchCubedScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "inch_cubed_scale"))
+        final Scale cubicInchScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "cubic_inch_scale"))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
-            .unit(inchCubedUnit)
+            .unit(cubicInchUnit)
             .build();
-        inchCubedScale.addStringValue(ENTITY_NAME, "INCH_CUBED_SCALE");
-        objects.add(inchCubedScale);
+        cubicInchScale.addStringValue(ENTITY_NAME, "CUBIC_INCH_SCALE");
+        objects.add(cubicInchScale);
 
-        final UnitOfMeasure feetCubedUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "feet_cubed_unit"))
+        final UnitOfMeasure cubicFeetUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "cubic_feet_unit"))
             .member__Of(classOfImperialUnits)
             .build();
-        feetCubedUnit.addStringValue(ENTITY_NAME, "FEET_CUBED_UNIT");
-        objects.add(feetCubedUnit);
+        cubicFeetUnit.addStringValue(ENTITY_NAME, "CUBIC_FEET_UNIT");
+        objects.add(cubicFeetUnit);
 
-        final Scale feetCubedScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "feet_cubed_scale"))
+        final Scale cubicFeetScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "cubic_feet_scale"))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
-            .unit(feetCubedUnit)
+            .unit(cubicFeetUnit)
             .build();
-        feetCubedScale.addStringValue(ENTITY_NAME, "FEET_CUBED_SCALE");
-        objects.add(feetCubedScale);
+        cubicFeetScale.addStringValue(ENTITY_NAME, "CUBIC_FEET_SCALE");
+        objects.add(cubicFeetScale);
 
         final UnitOfMeasure fluidOunceUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "fluid_ounce_unit"))
@@ -830,6 +856,13 @@ public final class CustomDataset {
             .build();
         kindOfMass.addStringValue(ENTITY_NAME, "KIND_OF_MASS");
         objects.add(kindOfMass);
+
+        final PhysicalQuantity mass = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "mass"))
+            .member_Of_Kind_M(kindOfMass)
+            .build();
+        mass.addStringValue(ENTITY_NAME, "MASS");
+        objects.add(mass);
 
         // Metric units
         final UnitOfMeasure milligramUnit = new UnitOfMeasureImpl.Builder(
@@ -944,6 +977,22 @@ public final class CustomDataset {
             .build();
         stoneScale.addStringValue(ENTITY_NAME, "STONE_SCALE");
         objects.add(stoneScale);
+
+        final UnitOfMeasure tonUnit = new UnitOfMeasureImpl.Builder(
+            new IRI(REF_BASE, "ton_unit"))
+            .member__Of(classOfImperialUnits)
+            .build();
+        tonUnit.addStringValue(ENTITY_NAME, "TON_UNIT");
+        objects.add(tonUnit);
+
+        final Scale tonScale = new ScaleImpl.Builder(
+            new IRI(REF_BASE, "ton_scale"))
+            .domain_M(kindOfMass)
+            .member__Of(classOfImperialUnits)
+            .unit(tonUnit)
+            .build();
+        tonScale.addStringValue(ENTITY_NAME, "TON_SCALE");
+        objects.add(tonScale);
         // End create mass units
         
         // Begin create light units
@@ -953,6 +1002,13 @@ public final class CustomDataset {
             .build();
         kindOfLightIntensity.addStringValue(ENTITY_NAME, "KIND_OF_LIGHT_INTENSITY");
         objects.add(kindOfLightIntensity);
+
+        final PhysicalQuantity lightIntensity = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "light_intensity"))
+            .member_Of_Kind_M(kindOfLightIntensity)
+            .build();
+        lightIntensity.addStringValue(ENTITY_NAME, "LIGHT_INTENSITY");
+        objects.add(lightIntensity);
 
         final UnitOfMeasure candelaUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "candela_unit"))
@@ -972,12 +1028,19 @@ public final class CustomDataset {
         // End create light units
 
         // Begin create molecular units
-        final KindOfPhysicalQuantity kindOfMolecularContents = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_molecular_contents"))
+        final KindOfPhysicalQuantity kindOfMolarQuantity = new KindOfPhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "kind_of_molar_quantity"))
             .member_Of(classOfUnits)
             .build();
-        kindOfMolecularContents.addStringValue(ENTITY_NAME, "KIND_OF_MOLECULAR_CONTENTS");
-        objects.add(kindOfMolecularContents);
+        kindOfMolarQuantity.addStringValue(ENTITY_NAME, "KIND_OF_MOLAR_QUANTITY");
+        objects.add(kindOfMolarQuantity);
+
+        final PhysicalQuantity molarQuantity = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "molar_quantity"))
+            .member_Of_Kind_M(kindOfMolarQuantity)
+            .build();
+        molarQuantity.addStringValue(ENTITY_NAME, "MOLAR_QUANTITY");
+        objects.add(molarQuantity);
 
         final UnitOfMeasure moleUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "mole_unit"))
@@ -988,7 +1051,7 @@ public final class CustomDataset {
 
         final Scale moleScale = new ScaleImpl.Builder(
             new IRI(REF_BASE, "mole_scale"))
-            .domain_M(kindOfMolecularContents)
+            .domain_M(kindOfMolarQuantity)
             .member__Of(classOfBaseSiUnits)
             .unit(moleUnit)
             .build();
@@ -1003,6 +1066,13 @@ public final class CustomDataset {
             .build();
         kindOfElectricCurrent.addStringValue(ENTITY_NAME, "KIND_OF_ELECTRICAL_CURRENT");
         objects.add(kindOfElectricCurrent);
+
+        final PhysicalQuantity electricCurrent = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "electrical_current"))
+            .member_Of_Kind_M(kindOfElectricCurrent)
+            .build();
+        electricCurrent.addStringValue(ENTITY_NAME, "ELECTRIC_CURRENT");
+        objects.add(electricCurrent);
 
         final UnitOfMeasure milliampereUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "milliampere_unit"))
@@ -1061,6 +1131,13 @@ public final class CustomDataset {
         kindOfElectricalPotential.addStringValue(ENTITY_NAME, "KIND_OF_ELECTRICAL_POTENTIAL");
         objects.add(kindOfElectricalPotential);
 
+        final PhysicalQuantity electricalPotential = new PhysicalQuantityImpl.Builder(
+            new IRI(REF_BASE, "electrical_potential"))
+            .member_Of_Kind_M(kindOfElectricalPotential)
+            .build();
+        electricalPotential.addStringValue(ENTITY_NAME, "ELECTRICAL_POTENTIAL");
+        objects.add(electricalPotential);
+
         final UnitOfMeasure millivoltUnit = new UnitOfMeasureImpl.Builder(
             new IRI(REF_BASE, "millivolt_unit"))
             .member__Of(classOfMetricUnits)
@@ -1110,221 +1187,573 @@ public final class CustomDataset {
         objects.add(kilovoltScale);
         // End create electrical potential units
         
+        /* Comment out quantities for now
+
         // Begin create temperature quantities
-        final PhysicalQuantity roomTempCelsius = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "room_temp_celsius"))
-            .member_Of_Kind_M(kindOfTemperature)
-            .build();
-        roomTempCelsius.addStringValue(ENTITY_NAME, "ROOM_TEMP_CELSIUS");
-        objects.add(roomTempCelsius);
-        
-        final IdentificationOfPhysicalQuantity identificationOfRoomTempCelsius = new 
+        final IdentificationOfPhysicalQuantity roomTempCelsius = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_room_temp_celsius"))
-                .represented_M(roomTempCelsius)
+                new IRI(USER_BASE, "room_temp_celsius"))
+                .represented_M(temperature)
                 .uses_M(degreesCelsiusScale)
                 .value__M(21.0)
                 .build();
-        identificationOfRoomTempCelsius.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_ROOM_TEMP_CELSIUS");
-        objects.add(identificationOfRoomTempCelsius);
-        
-        final PhysicalQuantity bodyTempKelvin = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "body_temp_kelvin"))
-            .member_Of_Kind_M(kindOfTemperature)
-            .build();
-        bodyTempKelvin.addStringValue(ENTITY_NAME, "BODY_TEMP_KELVIN");
-        objects.add(bodyTempKelvin);
+        roomTempCelsius.addStringValue(ENTITY_NAME, "ROOM_TEMP_CELSIUS");
+        objects.add(roomTempCelsius);
 
-        final IdentificationOfPhysicalQuantity identificationOfBodyTempKelvin = new 
+        final IdentificationOfPhysicalQuantity bodyTempKelvin = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_body_temp_kelvin"))
-                .represented_M(bodyTempKelvin)
+                new IRI(USER_BASE, "body_temp_kelvin"))
+                .represented_M(temperature)
                 .uses_M(degreesKelvinScale)
                 .value__M(310.15)
                 .build();
-        identificationOfBodyTempKelvin.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_BODY_TEMP_KELVIN");
-        objects.add(identificationOfBodyTempKelvin);
+        bodyTempKelvin.addStringValue(ENTITY_NAME, "BODY_TEMP_KELVIN");
+        objects.add(bodyTempKelvin);
         // End create temperature quantities
 
         // Begin create time quantities
-        final PhysicalQuantity averageBlinkTimeMilliseconds = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "average_blink_time_milliseconds"))
-            .member_Of_Kind_M(kindOfTime)
-            .build();
-        averageBlinkTimeMilliseconds.addStringValue(ENTITY_NAME, "AVERAGE_BLINK_TIME_MILLISECONDS");
-        objects.add(averageBlinkTimeMilliseconds);
-
-        final IdentificationOfPhysicalQuantity identificationOfAverageBlinkTimeMilliseconds = new
+        final IdentificationOfPhysicalQuantity averageBlinkTime = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_average_blink_time_milliseconds"))
-                .represented_M(averageBlinkTimeMilliseconds)
+                new IRI(USER_BASE, "average_blink_time"))
+                .represented_M(duration)
                 .uses_M(millisecondScale)
                 .value__M(100)
                 .build();
-        identificationOfAverageBlinkTimeMilliseconds.addStringValue(ENTITY_NAME, 
-            "IDENTIFICATION_OF_AVERAGE_BLINK_TIME_MILLISECONDS");
-        objects.add(identificationOfAverageBlinkTimeMilliseconds);
+        averageBlinkTime.addStringValue(ENTITY_NAME, "AVERAGE_BLINK_TIME");
+        objects.add(averageBlinkTime);
 
-        final PhysicalQuantity oneHundredMetreRecordSeconds = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "one_hundred_metre_record_seconds"))
-            .member_Of_Kind_M(kindOfTime)
-            .build();
-        oneHundredMetreRecordSeconds.addStringValue(ENTITY_NAME, "ONE_HUNDRED_METRE_RECORD_SECONDS");
-        objects.add(oneHundredMetreRecordSeconds);
-
-        final IdentificationOfPhysicalQuantity identificationOfOneHundredMetreRecordSeconds = new
+        final IdentificationOfPhysicalQuantity oneHundredMetreRecord = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_one_hundred_metre_record_seconds"))
-                .represented_M(oneHundredMetreRecordSeconds)
+                new IRI(USER_BASE, "one_hundred_metre_record"))
+                .represented_M(duration)
                 .uses_M(secondScale)
                 .value__M(9.58)
                 .build();
-        identificationOfOneHundredMetreRecordSeconds.addStringValue(ENTITY_NAME, 
-            "IDENTIFICATION_OF_ONE_HUNDRED_METRE_RECORD_SECONDS");
-        objects.add(identificationOfOneHundredMetreRecordSeconds);
+        oneHundredMetreRecord.addStringValue(ENTITY_NAME, "ONE_HUNDRED_METRE_RECORD");
+        objects.add(oneHundredMetreRecord);
 
-        final PhysicalQuantity minimumLengthOfFootballGameMinutes = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "minimum_length_of_football_game_minutes"))
-            .member_Of_Kind_M(kindOfTime)
-            .build();
-        minimumLengthOfFootballGameMinutes.addStringValue(ENTITY_NAME, "MINIMUM_LENGTH_OF_FOOTBALL_GAME_MINUTES");
-        objects.add(minimumLengthOfFootballGameMinutes);
-
-        final IdentificationOfPhysicalQuantity identificationOfMinimumLengthOfFootballGameMinutes = new
+        final IdentificationOfPhysicalQuantity minimumTimeOfFootballGame = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_minimum_length_of_football_game_minutes"))
-                .represented_M(minimumLengthOfFootballGameMinutes)
+                new IRI(USER_BASE, "minimum_time_of_football_game"))
+                .represented_M(duration)
                 .uses_M(minuteScale)
                 .value__M(80)
                 .build();
-        identificationOfMinimumLengthOfFootballGameMinutes.addStringValue(ENTITY_NAME, 
-            "IDENTIFICATION_OF_MINIMUM_LENGTH_OF_FOOTBALL_GAME_MINUTES");
-        objects.add(identificationOfMinimumLengthOfFootballGameMinutes);
+        minimumTimeOfFootballGame.addStringValue(ENTITY_NAME, "MINIMUM_TIME_OF_FOOTBALL_GAME");
+        objects.add(minimumTimeOfFootballGame);
 
-        final PhysicalQuantity averagePrivatePilotLicenseHours = new PhysicalQuantity.Builder(
-            new IRI(USER_BASE, "average_private_pilot_license_hours"))
-            .member_Of_Kind_M(kindOfTime)
-            .build();
-        averagePrivatePilotLicenseHours.addStringValue(ENTITY_NAME, "AVERAGE_PRIVATE_PILOT_LICENSE_HOURS");
-        objects.add(averagePrivatePilotLicenseHours);
-
-        final IdentificationOfPhysicalQuantity identificationOfAveragePrivatePilotLicenseHours = new
+        final IdentificationOfPhysicalQuantity averagePrivatePilotLicenseWorkTime = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_average_private_pilot_license_hours"))
-                .represented_M(averagePrivatePilotLicenseHours)
+                new IRI(USER_BASE, "average_private_pilot_license_work_time"))
+                .represented_M(duration)
                 .uses_M(hourScale)
                 .value__M(60)
                 .build();
-        identificationOfAveragePrivatePilotLicenseHours.addStringValue(ENTITY_NAME,
-            "IDENTIFICATION_OF_AVERAGE_PRIVATE_PILOT_LICENSE_HOURS");
-        objects.add(identificationOfAveragePrivatePilotLicenseHours);
+        averagePrivatePilotLicenseWorkTime.addStringValue(ENTITY_NAME, "AVERAGE_PRIVATE_PILOT_LICENSE_WORK_TIME");
+        objects.add(averagePrivatePilotLicenseWorkTime);
 
-        final PhysicalQuantity leapYearDays = new PhysicalQuantity.Builder(
-            new IRI(USER_BASE, "leap_year_days"))
-            .member_Of_Kind_M(kindOfTime)
-            .build();
-        leapYearDays.addStringValue(ENTITY_NAME, "LEAP_YEAR_DAYS");
-        objects.add(leapYearDays);
-
-        final IdentificationOfPhysicalQuantity identificationOfLeapYearDays = new 
+        final IdentificationOfPhysicalQuantity leapYearDays = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_leap_year_days"))
-                .represented_M(leapYearDays)
+                new IRI(USER_BASE, "leap_year_days"))
+                .represented_M(duration)
                 .uses_M(dayScale)
                 .value__M(366)
                 .build();
-        identificationOfLeapYearDays.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_LEAP_YEAR_DAYS");
-        objects.add(identificationOfLeapYearDays);
+        leapYearDays.addStringValue(ENTITY_NAME, "LEAP_YEAR_DAYS");
+        objects.add(leapYearDays);
 
-        final PhysicalQuantity schoolYearWeeks = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "school_year_weeks"))
-            .member_Of_Kind_M(kindOfTime)
-            .build();
-        schoolYearWeeks.addStringValue(ENTITY_NAME, "SCHOOL_YEAR_WEEKS");
-        objects.add(schoolYearWeeks);
-
-        final IdentificationOfPhysicalQuantity identificationOfSchoolYearWeeks = new 
+        final IdentificationOfPhysicalQuantity schoolYearWeeks = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_school_year_weeks"))
-                .represented_M(schoolYearWeeks)
+                new IRI(USER_BASE, "school_year_weeks"))
+                .represented_M(duration)
                 .uses_M(weekScale)
                 .value__M(39)
                 .build();
-        identificationOfSchoolYearWeeks.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_SCHOOL_YEAR_WEEKS");
-        objects.add(identificationOfSchoolYearWeeks);
+        schoolYearWeeks.addStringValue(ENTITY_NAME, "SCHOOL_YEAR_WEEKS");
+        objects.add(schoolYearWeeks);
 
-        final PhysicalQuantity pregnancyMonths = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "pregnancy_months"))
-            .member_Of_Kind_M(monthScale)
-            .build();
-        pregnancyMonths.addStringValue(ENTITY_NAME, "PREGNANCY_MONTHS");
-        objects.add(pregnancyMonths);
-
-        final IdentificationOfPhysicalQuantity identificationOfPregnancyMonths = new
+        final IdentificationOfPhysicalQuantity pregnancyMonths = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_pregnancy_months"))
-                .represented_M(pregnancyMonths)
+                new IRI(USER_BASE, "pregnancy_months"))
+                .represented_M(duration)
                 .uses_M(monthScale)
                 .value__M(9)
                 .build();
-        identificationOfPregnancyMonths.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_PREGNANCY_MONTHS");
-        objects.add(identificationOfPregnancyMonths);
+        pregnancyMonths.addStringValue(ENTITY_NAME, "PREGNANY_MONTHS");
+        objects.add(pregnancyMonths);
 
-        final PhysicalQuantity sixthFormYears = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "sixth_form_years"))
-            .member_Of_Kind_M(kindOfTime)
-            .build();
+        final IdentificationOfPhysicalQuantity sixthFormYears = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "sixth_form_years"))
+                .represented_M(duration)
+                .uses_M(yearScale)
+                .value__M(2)
+                .build();
         sixthFormYears.addStringValue(ENTITY_NAME, "SIXTH_FORM_YEARS");
         objects.add(sixthFormYears);
-
-        final IdentificationOfPhysicalQuantity identificationOfSixthFormYears = new 
-            IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_sixth_form_years"))
-                .represented_M(sixthFormYears)
-                .uses_M(yearScale)
-                .value_M(2)
-                .build();
-        identificationOfSixthFormYears.addStringValue(ENTITY_NAME, "IDENTIFICATION_OF_SIXTH_FORM_YEARS");
-        objects.add(identificationOfSixthFormYears);
         // End create time quantities
         
         // Begin create angle quantities
-        final PhysicalQuantity anglesInCircleRadians = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "angles_in_circle_radians"))
-            .member_Of_Kind_M(kindOfAngle)
-            .build();
-        anglesInCircleRadians.addStringValue(ENTITY_NAME, "ANGLES_IN_CIRCLE_RADIANS");
-        objects.add(anglesInCircleRadians);
-
-        final IdentificationOfPhysicalQuantity identificationOfAnglesInCircleRadians = new
+        final IdentificationOfPhysicalQuantity radiansInCircle = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_angles_in_circle_radians"))
-                .represented_M(anglesInCircleRadians)
+                new IRI(USER_BASE, "radians_in_circle"))
+                .represented_M(angle)
                 .uses_M(radianScale)
-                .value_M(6.28)
+                .value__M(6.28)
                 .build();
-        identificationOfAnglesInCircleRadians.addStringValue(ENTITY_NAME, 
-            "IDENTIFICATION_OF_ANGLES_IN_CIRCLES_RADIANS");
-        objects.add(identificationOfAnglesInCircleRadians);
+        radiansInCircle.addStringValue(ENTITY_NAME, "RADIANS_IN_CIRCLE");
+        objects.add(radiansInCircle);
 
-        final PhysicalQuantity anglesInCircleDegrees = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "angles_in_circle_degrees"))
-            .member_Of_Kind_M(kindOfAngle)
-            .build();
-        anglesInCircleDegrees.addStringValue(ENTITY_NAME, "ANGLES_IN_CIRCLE_DEGREES");
-        objects.add(anglesInCircleDegrees);
-
-        final IdentificationOfPhysicalQuantity identificationOfAnglesInCircleDegrees = new
+        final IdentificationOfPhysicalQuantity degreesInCircle = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "identification_of_angles_in_circle_degrees"))
-                .represented_M(anglesInCircleDegrees)
+                new IRI(USER_BASE, "degrees_in_circle"))
+                .represented_M(angle)
                 .uses_M(degreeScale)
-                .value_M(360)
+                .value__M(360)
                 .build();
-        identificationOfAnglesInCircleDegrees.addStringValue(ENTITY_NAME,
-            "IDENTIFICATION_OF_ANGLES_IN_CIRCLE_DEGREES");
-        objects.add(identificationOfAnglesInCircleDegrees);
+        degreesInCircle.addStringValue(ENTITY_NAME, "DEGREES_IN_CIRCLE");
+        objects.add(degreesInCircle);
         // End create angle quantities
+        
+        // Begin create distance quantities
+        // Metric measurements
+        final IdentificationOfPhysicalQuantity millimetresInCentimetre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "millimetres_in_centimetre"))
+                .represented_M(distance)
+                .uses_M(millimetreScale)
+                .value__M(10)
+                .build();
+        millimetresInCentimetre.addStringValue(ENTITY_NAME, "MILLIMETRES_IN_CENTIMETRE");
+        objects.add(millimetresInCentimetre);
+
+        final IdentificationOfPhysicalQuantity centimetresInMetre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "centimetres_in_metre"))
+                .represented_M(distance)
+                .uses_M(centimetreScale)
+                .value__M(100)
+                .build();
+        centimetresInMetre.addStringValue(ENTITY_NAME, "CENTIMETRES_IN_METRE");
+        objects.add(centimetresInMetre);
+
+        final IdentificationOfPhysicalQuantity metresInKilometre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "metres_in_kilometre"))
+                .represented_M(distance)
+                .uses_M(metreScale)
+                .value__M(1000)
+                .build();
+        metresInKilometre.addStringValue(ENTITY_NAME, "METRES_IN_KILOMETRE");
+        objects.add(metresInKilometre);
+
+        final IdentificationOfPhysicalQuantity approximateHeightOfIssKilometres = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "approximate_height_of_iss_kilometres"))
+                .represented_M(distance)
+                .uses_M(kilometreScale)
+                .value__M(420)
+                .build();
+        approximateHeightOfIssKilometres.addStringValue(ENTITY_NAME, "APPROXIMATE_HEIGHT_OF_ISS_KILOMETRES");
+        objects.add(approximateHeightOfIssKilometres);
+
+        // Imperial measurements
+        final IdentificationOfPhysicalQuantity inchesInFoot = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "inches_in_foot"))
+                .represented_M(distance)
+                .uses_M(inchScale)
+                .value__M(12)
+                .build();
+        inchesInFoot.addStringValue(ENTITY_NAME, "INCHES_IN_FOOT");
+        objects.add(inchesInFoot);
+
+        final IdentificationOfPhysicalQuantity feetInYard = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "feet_in_yard"))
+                .represented_M(distance)
+                .uses_M(footScale)
+                .value__M(3)
+                .build();
+        feetInYard.addStringValue(ENTITY_NAME, "FEET_IN_YARD");
+        objects.add(feetInYard);
+
+        final IdentificationOfPhysicalQuantity yardsInMile = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "yards_in_mile"))
+                .represented_M(distance)
+                .uses_M(yardScale)
+                .value__M(1760)
+                .build();
+        yardsInMile.addStringValue(ENTITY_NAME, "YARDS_IN_MILE");
+        objects.add(yardsInMile);
+
+        final IdentificationOfPhysicalQuantity approximateHeightOfIssMiles = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "approximate_height_of_iss_miles"))
+                .represented_M(distance)
+                .uses_M(mileScale)
+                .value__M(260)
+                .build();
+        approximateHeightOfIssMiles.addStringValue(ENTITY_NAME, "APPROXIMATE_HEIGHT_OF_ISS_MILES");
+        objects.add(approximateHeightOfIssMiles);
+        // End create distance quantities
+
+        // Begin create area quantities
+        // Metric measurements
+        final IdentificationOfPhysicalQuantity squareCentimetresInSquareMetre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "square_centimetres_in_square_metre"))
+                .represented_M(area)
+                .uses_M(squareCentimetreScale)
+                .value__M(10000)
+                .build();
+        squareCentimetresInSquareMetre.addStringValue(ENTITY_NAME, "SQUARE_CENTIMETRES_IN_SQUARE_METRE");
+        objects.add(squareCentimetresInSquareMetre);
+
+        final IdentificationOfPhysicalQuantity squareMetresInSquareKilometre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "square_metres_in_square_kilometre"))
+                .represented_M(area)
+                .uses_M(squareMetreScale)
+                .value__M(1000000)
+                .build();
+        squareMetresInSquareKilometre.addStringValue(ENTITY_NAME, "SQUARE_METRES_IN_SQUARE_KILOMETRE");
+        objects.add(squareMetresInSquareKilometre);
+
+        final IdentificationOfPhysicalQuantity areaOfEnglandInSquareKilometres = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "area_of_england_in_square_kilometres"))
+                .represented_M(area)
+                .uses_M(squareKilometreScale)
+                .value__M(130279)
+                .build();
+        areaOfEnglandInSquareKilometres.addStringValue(ENTITY_NAME, "AREA_OF_ENGLAND_IN_SQUARE_KILOMETRES");
+        objects.add(areaOfEnglandInSquareKilometres);
+
+        // Imperial measurements
+        final IdentificationOfPhysicalQuantity squareInchesInSquareFoot = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "square_inches_in_square_foot"))
+                .represented_M(area)
+                .uses_M(squareInchScale)
+                .value__M(144)
+                .build();
+        squareInchesInSquareFoot.addStringValue(ENTITY_NAME, "SQUARE_INCHES_IN_SQUARE_FOOT");
+        objects.add(squareInchesInSquareFoot);
+
+        final IdentificationOfPhysicalQuantity squareFeetInSquareYard = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "square_feet_in_square_yard"))
+                .represented_M(area)
+                .uses_M(squareFootScale)
+                .value__M(9)
+                .build();
+        squareFeetInSquareYard.addStringValue(ENTITY_NAME, "SQUARE_FEET_IN_SQUARE_YARD");
+        objects.add(squareFeetInSquareYard);
+
+        final IdentificationOfPhysicalQuantity squareYardsInAcre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "square_yards_in_acre"))
+                .represented_M(area)
+                .uses_M(squareYardScale)
+                .value__M(4840)
+                .build();
+        squareYardsInAcre.addStringValue(ENTITY_NAME, "SQUARE_YARDS_IN_ACRE");
+        objects.add(squareYardsInAcre);
+
+        final IdentificationOfPhysicalQuantity acresInSquareMile = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "acres_in_square_mile"))
+                .represented_M(area)
+                .uses_M(acreScale)
+                .value__M(640)
+                .build();
+        acresInSquareMile.addStringValue(ENTITY_NAME, "ACRES_IN_SQUARE_MILE");
+        objects.add(acresInSquareMile);
+
+        final IdentificationOfPhysicalQuantity areaOfEnglandInSquareMiles = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "area_of_england_in_square_miles"))
+                .represented_M(area)
+                .uses_M(squareMileScale)
+                .value__M(50301)
+                .build();
+        areaOfEnglandInSquareKilometres.addStringValue(ENTITY_NAME, "AREA_OF_ENGLAND_IN_SQUARE_MILES");
+        objects.add(areaOfEnglandInSquareMiles);
+        // End create area quantities
+        
+        // Begin create volume quantities
+        // Metric measurements
+        final IdentificationOfPhysicalQuantity cubicCentimetresInCubicDecimetre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "cubic_centimetres_in_cubic_decimetre"))
+                .represented_M(volume)
+                .uses_M(cubicCentimetreScale)
+                .value__M(1000)
+                .build();
+        cubicCentimetresInCubicDecimetre.addStringValue(ENTITY_NAME, "CUBIC_CENTIMETRES_IN_CUBIC_DECIMETRE");
+        objects.add(cubicCentimetresInCubicDecimetre);
+
+        final IdentificationOfPhysicalQuantity cubicDecimetresInCubicMetre = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "cubic_decimetres_in_cubic_metre"))
+                .represented_M(volume)
+                .uses_M(cubicDecimetreScale)
+                .value__M(1000)
+                .build();
+        cubicDecimetresInCubicMetre.addStringValue(ENTITY_NAME, "CUBIC_DECIMETRES_IN_CUBIC_METRE");
+        objects.add(cubicDecimetresInCubicMetre);
+
+        final IdentificationOfPhysicalQuantity minimumVolumeOlympicSwimmingPoolCubicMetres = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "minimum_volume_olympic_swimming_pool_cubic_metres"))
+                .represented_M(volume)
+                .uses_M(cubicMetreScale)
+                .value__M(2500)
+                .build();
+        minimumVolumeOlympicSwimmingPoolCubicMetres.addStringValue(ENTITY_NAME, 
+            "MINIMUM_VOLUME_OLYMPIC_SWIMMING_POOL_CUBIC_METRES");
+        objects.add(minimumVolumeOlympicSwimmingPoolCubicMetres);
+
+        // Imperial measurements
+        final IdentificationOfPhysicalQuantity cubicInchesInCubicFoot = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "cubic_inches_in_cubic_foot"))
+                .represented_M(volume)
+                .uses_M(cubicInchScale)
+                .value__M(1728)
+                .build();
+        cubicInchesInCubicFoot.addStringValue(ENTITY_NAME, "CUBIC_INCHES_IN_CUBIC_FOOT");
+        objects.add(cubicInchesInCubicFoot);
+
+        final IdentificationOfPhysicalQuantity averageHotTubVolumeCubicFeet = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "average_hot_tub_volume_cubic_feet"))
+                .represented_M(volume)
+                .uses_M(cubicFeetScale)
+                .value__M(25.4)
+                .build();
+        averageHotTubVolumeCubicFeet.addStringValue(ENTITY_NAME, "AVERAGE_HOT_TUB_VOLUME_CUBIC_FEET");
+        objects.add(averageHotTubVolumeCubicFeet);
+
+        final IdentificationOfPhysicalQuantity fluidOuncesInPint = new 
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "fluid_ounces_in_pint"))
+                .represented_M(volume)
+                .uses_M(fluidOunceScale)
+                .value__M(20)
+                .build();
+        fluidOuncesInPint.addStringValue(ENTITY_NAME, "FLUID_OUNCES_IN_PINT");
+        objects.add(fluidOuncesInPint);
+
+        final IdentificationOfPhysicalQuantity pintsInQuart = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "pints_in_quart"))
+                .represented_M(volume)
+                .uses_M(pintScale)
+                .value__M(2)
+                .build();
+        pintsInQuart.addStringValue(ENTITY_NAME, "PINTS_IN_QUART");
+        objects.add(pintsInQuart);
+
+        final IdentificationOfPhysicalQuantity quartsInGallon = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "quarts_in_gallon"))
+                .represented_M(volume)
+                .uses_M(quartScale)
+                .value__M(4)
+                .build();
+        quartsInGallon.addStringValue(ENTITY_NAME, "QUARTS_IN_GALLON");
+        objects.add(quartsInGallon);
+
+        final IdentificationOfPhysicalQuantity minimumVolumeOlympicSwimmingPoolGallons = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "minimum_volume_olympic_swimming_pool_gallons"))
+                .represented_M(volume)
+                .uses_M(gallonScale)
+                .value__M(660430)
+                .build();
+        minimumVolumeOlympicSwimmingPoolGallons.addStringValue(ENTITY_NAME, 
+            "MINIMUM_VOLUME_OLYMPIC_SWIMMING_POOL_GALLONS");
+        // End create volume quantities
+        
+        // Begin create mass quantities
+        // Metric measurements
+        final IdentificationOfPhysicalQuantity milligramsInGram = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "milligrams_in_a_gram"))
+                .represented_M(mass)
+                .uses_M(milligramScale)
+                .value__M(1000)
+                .build();
+        milligramsInGram.addStringValue(ENTITY_NAME, "MILLIGRAMS_IN_A_GRAM");
+        objects.add(milligramsInGram);
+
+        final IdentificationOfPhysicalQuantity gramsInKilogram = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "grams_in_a_kilogram"))
+                .represented_M(mass)
+                .uses_M(gramScale)
+                .value__M(1000)
+                .build();
+        gramsInKilogram.addStringValue(ENTITY_NAME, "GRAMS_IN_A_KILOGRAM");
+        objects.add(gramsInKilogram);
+
+        final IdentificationOfPhysicalQuantity kilogramsInTonne = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "kilograms_in_a_tonne"))
+                .represented_M(mass)
+                .uses_M(kilogramScale)
+                .value__M(1000)
+                .build();
+        kilogramsInTonne.addStringValue(ENTITY_NAME, "KILOGRAMS_IN_A_TONNE");
+        objects.add(kilogramsInTonne);
+
+        final IdentificationOfPhysicalQuantity maximumLightGoodsVehicleMassTonnes = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "maximum_light_goods_vehicle_mass_tonnes"))
+                .represented_M(mass)
+                .uses_M(tonneScale)
+                .value__M(3.5)
+                .build();
+        maximumLightGoodsVehicleMassTonnes.addStringValue(ENTITY_NAME,
+            "MAXIMUM_LIGHT_GOODS_VEHICLE_MASS_TONNES");
+            objects.add(maximumLightGoodsVehicleMassTonnes);
+
+        // Imperial measurements
+        final IdentificationOfPhysicalQuantity ouncesInPound = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "ounces_in_pound"))
+                .represented_M(mass)
+                .uses_M(ounceScale)
+                .value__M(16)
+                .build();
+        ouncesInPound.addStringValue(ENTITY_NAME, "OUNCES_IN_POUND");
+        objects.add(ouncesInPound);
+
+        final IdentificationOfPhysicalQuantity poundsInStone = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "pounds_in_stone"))
+                .represented_M(mass)
+                .uses_M(poundScale)
+                .value__M(14)
+                .build();
+        poundsInStone.addStringValue(ENTITY_NAME, "POUNDS_IN_STONE");
+        objects.add(poundsInStone);
+
+        final IdentificationOfPhysicalQuantity stonesInTon = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "stones_in_ton"))
+                .represented_M(mass)
+                .uses_M(stoneScale)
+                .value__M(160)
+                .build();
+        stonesInTon.addStringValue(ENTITY_NAME, "STONES_IN_TON");
+        objects.add(stonesInTon);
+
+        final IdentificationOfPhysicalQuantity maximumLightGoodsVehicleMassTons = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "maximum_light_goods_vehicle_mass_tons"))
+                .represented_M(mass)
+                .uses_M(tonScale)
+                .value__M(3.85809)
+                .build();
+        maximumLightGoodsVehicleMassTons.addStringValue(ENTITY_NAME, 
+            "MAXIMUM_LIGHT_GOODS_VEHICLE_MASS_TONS");
+        objects.add(maximumLightGoodsVehicleMassTons);
+        // End create mass quantities
+        
+        // Begin create light quantities
+        final IdentificationOfPhysicalQuantity averageCandleLightIntensityCandela = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "average_candle_light_intensity_candela"))
+                .represented_M(lightIntensity)
+                .uses_M(candelaScale)
+                .value__M(1)
+                .build();
+        averageCandleLightIntensityCandela.addStringValue(ENTITY_NAME, "AVERAGE_CANDLE_LIGHT_INTENSITY_CANDELA");
+        objects.add(averageCandleLightIntensityCandela);
+        // End create light quantities
+        
+        // Begin create molecular quantities
+        final IdentificationOfPhysicalQuantity molesInTwentyFourGramsCarbonTwelve = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "moles_in_twenty_four_grams_of_carbon_twelve"))
+                .represented_M(molarQuantity)
+                .uses_M(moleScale)
+                .value__M(2)
+                .build();
+        molesInTwentyFourGramsCarbonTwelve.addStringValue(ENTITY_NAME, 
+            "MOLES_IN_TWENTY_FOUR_GRAMS_OF_CARBON_TWELVE");
+        objects.add(molesInTwentyFourGramsCarbonTwelve);
+        // End create molecular quantities
+        
+        // Begin create electrical current quantities
+        final IdentificationOfPhysicalQuantity milliamperesInAmpere = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "milliamperes_in_ampere"))
+                .represented_M(electricCurrent)
+                .uses_M(milliampereScale)
+                .value__M(1000)
+                .build();
+        milliamperesInAmpere.addStringValue(ENTITY_NAME, "MILLIAMPERES_IN_AMPERE");
+        objects.add(milliamperesInAmpere);
+
+        final IdentificationOfPhysicalQuantity amperesInKiloampere = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "amperes_in_kiloampere"))
+                .represented_M(electricCurrent)
+                .uses_M(ampereScale)
+                .value__M(1000)
+                .build();
+        amperesInKiloampere.addStringValue(ENTITY_NAME, "AMPERES_IN_KILOAMPERE");
+        objects.add(amperesInKiloampere);
+
+        final IdentificationOfPhysicalQuantity averageColdCrankingKiloamperesForCar = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "average_cold_cranking_kiloamperes_for_car"))
+                .represented_M(electricCurrent)
+                .uses_M(kiloampereScale)
+                .value__M(0.4)
+                .build();
+        averageColdCrankingKiloamperesForCar.addStringValue(ENTITY_NAME, 
+            "AVERAGE_COLD_CRANKING_KILOAMPERES_FOR_CAR");
+        objects.add(averageColdCrankingKiloamperesForCar);
+        // End create electrical current quantities
+        
+        // Begin create electrical potential quantities
+        final IdentificationOfPhysicalQuantity millivoltsInVolt = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "millivolts_in_volt"))
+                .represented_M(electricalPotential)
+                .uses_M(millivoltScale)
+                .value__M(1000)
+                .build();
+        millivoltsInVolt.addStringValue(ENTITY_NAME, "MILLIVOLTS_IN_VOLT");
+        objects.add(millivoltsInVolt);
+
+        final IdentificationOfPhysicalQuantity voltsInKilovolt = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "volts_in_kilovolt"))
+                .represented_M(electricalPotential)
+                .uses_M(voltScale)
+                .value__M(1000)
+                .build();
+        voltsInKilovolt.addStringValue(ENTITY_NAME, "VOLTS_IN_KILOVOLT");
+        objects.add(voltsInKilovolt);
+
+        final IdentificationOfPhysicalQuantity maxNationalGridVoltage = new
+            IdentificationOfPhysicalQuantityImpl.Builder(
+                new IRI(USER_BASE, "maximum_national_grid_voltage"))
+                .represented_M(electricalPotential)
+                .uses_M(kilovoltScale)
+                .value__M(400)
+                .build();
+        maxNationalGridVoltage.addStringValue(ENTITY_NAME, "MAXIMUM_NATIONAL_GRID_VOLTAGE");
+        objects.add(maxNationalGridVoltage);
+        // End create electrical potential quantities
+        */
         return objects;
     }
                     
