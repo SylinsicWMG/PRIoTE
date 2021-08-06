@@ -18,16 +18,32 @@ import uk.gov.gchq.hqdm.iri.HqdmIri;
 import uk.gov.gchq.hqdm.iri.IRI;
 import uk.gov.gchq.hqdm.model.ClassOfPhysicalQuantity;
 import uk.gov.gchq.hqdm.model.IdentificationOfPhysicalQuantity;
+import uk.gov.gchq.hqdm.model.KindOfAssociation;
 import uk.gov.gchq.hqdm.model.KindOfPhysicalQuantity;
+import uk.gov.gchq.hqdm.model.Pattern;
 import uk.gov.gchq.hqdm.model.PhysicalQuantity;
+import uk.gov.gchq.hqdm.model.PossibleWorld;
+import uk.gov.gchq.hqdm.model.RecognizingLanguageCommunity;
+import uk.gov.gchq.hqdm.model.RepresentationByPattern;
+import uk.gov.gchq.hqdm.model.RepresentationBySign;
+import uk.gov.gchq.hqdm.model.Role;
 import uk.gov.gchq.hqdm.model.Scale;
+import uk.gov.gchq.hqdm.model.Sign;
 import uk.gov.gchq.hqdm.model.Thing;
 import uk.gov.gchq.hqdm.model.UnitOfMeasure;
 import uk.gov.gchq.hqdm.model.impl.ClassOfPhysicalQuantityImpl;
 import uk.gov.gchq.hqdm.model.impl.IdentificationOfPhysicalQuantityImpl;
+import uk.gov.gchq.hqdm.model.impl.KindOfAssociationImpl;
 import uk.gov.gchq.hqdm.model.impl.KindOfPhysicalQuantityImpl;
+import uk.gov.gchq.hqdm.model.impl.PatternImpl;
 import uk.gov.gchq.hqdm.model.impl.PhysicalQuantityImpl;
+import uk.gov.gchq.hqdm.model.impl.PossibleWorldImpl;
+import uk.gov.gchq.hqdm.model.impl.RecognizingLanguageCommunityImpl;
+import uk.gov.gchq.hqdm.model.impl.RepresentationByPatternImpl;
+import uk.gov.gchq.hqdm.model.impl.RepresentationBySignImpl;
+import uk.gov.gchq.hqdm.model.impl.RoleImpl;
 import uk.gov.gchq.hqdm.model.impl.ScaleImpl;
+import uk.gov.gchq.hqdm.model.impl.SignImpl;
 import uk.gov.gchq.hqdm.model.impl.UnitOfMeasureImpl;
 
 
@@ -85,7 +101,7 @@ public final class CustomDataset {
             .build();
         classOfImperialUnits.addStringValue(ENTITY_NAME, "CLASS_OF_IMPERIAL_UNITS");
         objects.add(classOfImperialUnits);
-
+        
         final ClassOfPhysicalQuantity classOfMetricUnits = new ClassOfPhysicalQuantityImpl.Builder(
             new IRI(REF_BASE, "class_of_metric_units"))
             .has_Superclass(classOfUnits)
@@ -194,7 +210,7 @@ public final class CustomDataset {
         objects.add(kindOfDuration);
 
         final PhysicalQuantity duration = new PhysicalQuantityImpl.Builder(
-            new IRI(USER_BASE, "duration"))
+            new IRI(REF_BASE, "duration"))
             .member_Of_Kind_M(kindOfDuration)
             .build();
         duration.addStringValue(ENTITY_NAME, "DURATION");
@@ -1187,7 +1203,90 @@ public final class CustomDataset {
         objects.add(kilovoltScale);
         // End create electrical potential units
         
-        /* Comment out quantities for now
+        // Begin create recognising language community
+        final PossibleWorld world = new PossibleWorldImpl(new IRI(REF_BASE, "world"));
+        world.addStringValue(ENTITY_NAME, "WORLD");
+        objects.add(world);
+
+        final Pattern quantityUnitPattern = new PatternImpl.Builder(
+            new IRI(REF_BASE, "quantity_unit_pattern"))
+            .build();
+        quantityUnitPattern.addStringValue(ENTITY_NAME, "QUANTITY_UNIT_PATTERN");
+        objects.add(quantityUnitPattern);
+        
+        final Role communityRole = new RoleImpl.Builder(
+            new IRI(REF_BASE, "community_role"))
+            .build();
+        communityRole.addStringValue(ENTITY_NAME, "COMMUNITY_ROLE");
+        objects.add(communityRole);
+
+        final RecognizingLanguageCommunity communityUnderstandingUnitsOfMeasurement = new 
+            RecognizingLanguageCommunityImpl.Builder(
+                new IRI(REF_BASE, "community_understanding_units_of_measurement"))
+                .member_Of_Kind_M(communityRole)
+                .part_Of_Possible_World_M(world)
+                .build();
+        communityUnderstandingUnitsOfMeasurement.addStringValue(ENTITY_NAME,
+            "COMMUNITY_UNDERSTANDING_UNITS_OF_MEASUREMENT");
+        objects.add(communityUnderstandingUnitsOfMeasurement);
+
+        final RepresentationByPattern quantityUnitPatternRepresentation = new 
+            RepresentationByPatternImpl.Builder(
+            new IRI(REF_BASE, "quantity_unit_pattern_representation"))
+            .consists_Of_By_Class_M(quantityUnitPattern)
+            .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
+            .represented_M(quantityUnitPattern)
+            .build();
+        quantityUnitPatternRepresentation.addStringValue(ENTITY_NAME,
+            "QUANTITY_UNIT_PATTERN_REPRESENTATION");
+        objects.add(quantityUnitPatternRepresentation);
+
+        final KindOfAssociation quantityUnitAssociationKind = new KindOfAssociationImpl.Builder(
+            new IRI(REF_BASE, "class_of_quantity_unit_representation"))
+            .build();
+        quantityUnitAssociationKind.addStringValue(ENTITY_NAME, "CLASS_OF_QUANTITY_UNIT_REPRESENTATION");
+        objects.add(quantityUnitAssociationKind);
+
+        final RepresentationBySign quantitySignRepresentation = new RepresentationBySignImpl.Builder(
+            new IRI(REF_BASE, "quantity_sign_representation"))
+            .consists_Of_(communityUnderstandingUnitsOfMeasurement)
+            .member_Of__M(quantityUnitPatternRepresentation)
+            .member_Of_Kind_M(quantityUnitAssociationKind)
+            .part_Of_Possible_World_M(world)
+            .represents_M(classOfUnits)
+            .build();
+        quantitySignRepresentation.addStringValue(ENTITY_NAME, "QUANTITY_SIGN_REPRESENTATION");
+        objects.add(quantitySignRepresentation);
+
+        final RepresentationBySign unitSignRepresentation = new RepresentationBySignImpl.Builder(
+            new IRI(REF_BASE, "unit_sign_representation"))
+            .consists_Of_(communityUnderstandingUnitsOfMeasurement)
+            .member_Of__M(quantityUnitPatternRepresentation)
+            .member_Of_Kind_M(quantityUnitAssociationKind)
+            .part_Of_Possible_World_M(world)
+            .represents_M(classOfUnits)
+            .build();
+        unitSignRepresentation.addStringValue(ENTITY_NAME, "UNIT_SIGN_REPRESENTATION");
+        objects.add(unitSignRepresentation);
+
+        final Sign quantitySign = new SignImpl.Builder(
+            new IRI(REF_BASE, "quantity_sign"))
+            .member_Of__M(quantityUnitPattern)
+            .part_Of_Possible_World_M(world)
+            .participant_In_M(quantitySignRepresentation)
+            .build();
+        quantitySign.addStringValue(ENTITY_NAME, "QUANTITY_SIGN");
+        objects.add(quantitySign);
+
+        final Sign unitSign = new SignImpl.Builder(
+            new IRI(REF_BASE, "measurement_sign"))
+            .member_Of__M(quantityUnitPattern)
+            .part_Of_Possible_World_M(world)
+            .participant_In_M(unitSignRepresentation)
+            .build();
+        unitSign.addStringValue(ENTITY_NAME, "MEASUREMENT_SIGN");
+        objects.add(unitSign);
+        // End create recognising language community
 
         // Begin create temperature quantities
         final IdentificationOfPhysicalQuantity roomTempCelsius = new 
@@ -1196,6 +1295,7 @@ public final class CustomDataset {
                 .represented_M(temperature)
                 .uses_M(degreesCelsiusScale)
                 .value__M(21.0)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         roomTempCelsius.addStringValue(ENTITY_NAME, "ROOM_TEMP_CELSIUS");
         objects.add(roomTempCelsius);
@@ -1206,6 +1306,7 @@ public final class CustomDataset {
                 .represented_M(temperature)
                 .uses_M(degreesKelvinScale)
                 .value__M(310.15)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         bodyTempKelvin.addStringValue(ENTITY_NAME, "BODY_TEMP_KELVIN");
         objects.add(bodyTempKelvin);
@@ -1218,6 +1319,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(millisecondScale)
                 .value__M(100)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         averageBlinkTime.addStringValue(ENTITY_NAME, "AVERAGE_BLINK_TIME");
         objects.add(averageBlinkTime);
@@ -1228,6 +1330,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(secondScale)
                 .value__M(9.58)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         oneHundredMetreRecord.addStringValue(ENTITY_NAME, "ONE_HUNDRED_METRE_RECORD");
         objects.add(oneHundredMetreRecord);
@@ -1238,6 +1341,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(minuteScale)
                 .value__M(80)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         minimumTimeOfFootballGame.addStringValue(ENTITY_NAME, "MINIMUM_TIME_OF_FOOTBALL_GAME");
         objects.add(minimumTimeOfFootballGame);
@@ -1248,6 +1352,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(hourScale)
                 .value__M(60)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         averagePrivatePilotLicenseWorkTime.addStringValue(ENTITY_NAME, "AVERAGE_PRIVATE_PILOT_LICENSE_WORK_TIME");
         objects.add(averagePrivatePilotLicenseWorkTime);
@@ -1258,6 +1363,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(dayScale)
                 .value__M(366)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         leapYearDays.addStringValue(ENTITY_NAME, "LEAP_YEAR_DAYS");
         objects.add(leapYearDays);
@@ -1268,6 +1374,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(weekScale)
                 .value__M(39)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         schoolYearWeeks.addStringValue(ENTITY_NAME, "SCHOOL_YEAR_WEEKS");
         objects.add(schoolYearWeeks);
@@ -1278,6 +1385,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(monthScale)
                 .value__M(9)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         pregnancyMonths.addStringValue(ENTITY_NAME, "PREGNANY_MONTHS");
         objects.add(pregnancyMonths);
@@ -1288,6 +1396,7 @@ public final class CustomDataset {
                 .represented_M(duration)
                 .uses_M(yearScale)
                 .value__M(2)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         sixthFormYears.addStringValue(ENTITY_NAME, "SIXTH_FORM_YEARS");
         objects.add(sixthFormYears);
@@ -1300,6 +1409,7 @@ public final class CustomDataset {
                 .represented_M(angle)
                 .uses_M(radianScale)
                 .value__M(6.28)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         radiansInCircle.addStringValue(ENTITY_NAME, "RADIANS_IN_CIRCLE");
         objects.add(radiansInCircle);
@@ -1310,6 +1420,7 @@ public final class CustomDataset {
                 .represented_M(angle)
                 .uses_M(degreeScale)
                 .value__M(360)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         degreesInCircle.addStringValue(ENTITY_NAME, "DEGREES_IN_CIRCLE");
         objects.add(degreesInCircle);
@@ -1323,6 +1434,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(millimetreScale)
                 .value__M(10)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         millimetresInCentimetre.addStringValue(ENTITY_NAME, "MILLIMETRES_IN_CENTIMETRE");
         objects.add(millimetresInCentimetre);
@@ -1333,6 +1445,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(centimetreScale)
                 .value__M(100)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         centimetresInMetre.addStringValue(ENTITY_NAME, "CENTIMETRES_IN_METRE");
         objects.add(centimetresInMetre);
@@ -1343,6 +1456,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(metreScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         metresInKilometre.addStringValue(ENTITY_NAME, "METRES_IN_KILOMETRE");
         objects.add(metresInKilometre);
@@ -1353,6 +1467,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(kilometreScale)
                 .value__M(420)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         approximateHeightOfIssKilometres.addStringValue(ENTITY_NAME, "APPROXIMATE_HEIGHT_OF_ISS_KILOMETRES");
         objects.add(approximateHeightOfIssKilometres);
@@ -1364,6 +1479,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(inchScale)
                 .value__M(12)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         inchesInFoot.addStringValue(ENTITY_NAME, "INCHES_IN_FOOT");
         objects.add(inchesInFoot);
@@ -1374,6 +1490,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(footScale)
                 .value__M(3)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         feetInYard.addStringValue(ENTITY_NAME, "FEET_IN_YARD");
         objects.add(feetInYard);
@@ -1384,6 +1501,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(yardScale)
                 .value__M(1760)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         yardsInMile.addStringValue(ENTITY_NAME, "YARDS_IN_MILE");
         objects.add(yardsInMile);
@@ -1394,6 +1512,7 @@ public final class CustomDataset {
                 .represented_M(distance)
                 .uses_M(mileScale)
                 .value__M(260)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         approximateHeightOfIssMiles.addStringValue(ENTITY_NAME, "APPROXIMATE_HEIGHT_OF_ISS_MILES");
         objects.add(approximateHeightOfIssMiles);
@@ -1407,6 +1526,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(squareCentimetreScale)
                 .value__M(10000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         squareCentimetresInSquareMetre.addStringValue(ENTITY_NAME, "SQUARE_CENTIMETRES_IN_SQUARE_METRE");
         objects.add(squareCentimetresInSquareMetre);
@@ -1417,6 +1537,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(squareMetreScale)
                 .value__M(1000000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         squareMetresInSquareKilometre.addStringValue(ENTITY_NAME, "SQUARE_METRES_IN_SQUARE_KILOMETRE");
         objects.add(squareMetresInSquareKilometre);
@@ -1427,6 +1548,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(squareKilometreScale)
                 .value__M(130279)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         areaOfEnglandInSquareKilometres.addStringValue(ENTITY_NAME, "AREA_OF_ENGLAND_IN_SQUARE_KILOMETRES");
         objects.add(areaOfEnglandInSquareKilometres);
@@ -1438,6 +1560,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(squareInchScale)
                 .value__M(144)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         squareInchesInSquareFoot.addStringValue(ENTITY_NAME, "SQUARE_INCHES_IN_SQUARE_FOOT");
         objects.add(squareInchesInSquareFoot);
@@ -1448,6 +1571,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(squareFootScale)
                 .value__M(9)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         squareFeetInSquareYard.addStringValue(ENTITY_NAME, "SQUARE_FEET_IN_SQUARE_YARD");
         objects.add(squareFeetInSquareYard);
@@ -1458,6 +1582,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(squareYardScale)
                 .value__M(4840)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         squareYardsInAcre.addStringValue(ENTITY_NAME, "SQUARE_YARDS_IN_ACRE");
         objects.add(squareYardsInAcre);
@@ -1468,6 +1593,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(acreScale)
                 .value__M(640)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         acresInSquareMile.addStringValue(ENTITY_NAME, "ACRES_IN_SQUARE_MILE");
         objects.add(acresInSquareMile);
@@ -1478,6 +1604,7 @@ public final class CustomDataset {
                 .represented_M(area)
                 .uses_M(squareMileScale)
                 .value__M(50301)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         areaOfEnglandInSquareKilometres.addStringValue(ENTITY_NAME, "AREA_OF_ENGLAND_IN_SQUARE_MILES");
         objects.add(areaOfEnglandInSquareMiles);
@@ -1491,6 +1618,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(cubicCentimetreScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         cubicCentimetresInCubicDecimetre.addStringValue(ENTITY_NAME, "CUBIC_CENTIMETRES_IN_CUBIC_DECIMETRE");
         objects.add(cubicCentimetresInCubicDecimetre);
@@ -1501,6 +1629,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(cubicDecimetreScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         cubicDecimetresInCubicMetre.addStringValue(ENTITY_NAME, "CUBIC_DECIMETRES_IN_CUBIC_METRE");
         objects.add(cubicDecimetresInCubicMetre);
@@ -1511,6 +1640,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(cubicMetreScale)
                 .value__M(2500)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         minimumVolumeOlympicSwimmingPoolCubicMetres.addStringValue(ENTITY_NAME, 
             "MINIMUM_VOLUME_OLYMPIC_SWIMMING_POOL_CUBIC_METRES");
@@ -1523,6 +1653,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(cubicInchScale)
                 .value__M(1728)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         cubicInchesInCubicFoot.addStringValue(ENTITY_NAME, "CUBIC_INCHES_IN_CUBIC_FOOT");
         objects.add(cubicInchesInCubicFoot);
@@ -1533,6 +1664,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(cubicFeetScale)
                 .value__M(25.4)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         averageHotTubVolumeCubicFeet.addStringValue(ENTITY_NAME, "AVERAGE_HOT_TUB_VOLUME_CUBIC_FEET");
         objects.add(averageHotTubVolumeCubicFeet);
@@ -1543,6 +1675,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(fluidOunceScale)
                 .value__M(20)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         fluidOuncesInPint.addStringValue(ENTITY_NAME, "FLUID_OUNCES_IN_PINT");
         objects.add(fluidOuncesInPint);
@@ -1553,6 +1686,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(pintScale)
                 .value__M(2)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         pintsInQuart.addStringValue(ENTITY_NAME, "PINTS_IN_QUART");
         objects.add(pintsInQuart);
@@ -1563,6 +1697,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(quartScale)
                 .value__M(4)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         quartsInGallon.addStringValue(ENTITY_NAME, "QUARTS_IN_GALLON");
         objects.add(quartsInGallon);
@@ -1573,6 +1708,7 @@ public final class CustomDataset {
                 .represented_M(volume)
                 .uses_M(gallonScale)
                 .value__M(660430)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         minimumVolumeOlympicSwimmingPoolGallons.addStringValue(ENTITY_NAME, 
             "MINIMUM_VOLUME_OLYMPIC_SWIMMING_POOL_GALLONS");
@@ -1586,6 +1722,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(milligramScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         milligramsInGram.addStringValue(ENTITY_NAME, "MILLIGRAMS_IN_A_GRAM");
         objects.add(milligramsInGram);
@@ -1596,6 +1733,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(gramScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         gramsInKilogram.addStringValue(ENTITY_NAME, "GRAMS_IN_A_KILOGRAM");
         objects.add(gramsInKilogram);
@@ -1606,6 +1744,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(kilogramScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         kilogramsInTonne.addStringValue(ENTITY_NAME, "KILOGRAMS_IN_A_TONNE");
         objects.add(kilogramsInTonne);
@@ -1616,6 +1755,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(tonneScale)
                 .value__M(3.5)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         maximumLightGoodsVehicleMassTonnes.addStringValue(ENTITY_NAME,
             "MAXIMUM_LIGHT_GOODS_VEHICLE_MASS_TONNES");
@@ -1628,6 +1768,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(ounceScale)
                 .value__M(16)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         ouncesInPound.addStringValue(ENTITY_NAME, "OUNCES_IN_POUND");
         objects.add(ouncesInPound);
@@ -1638,6 +1779,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(poundScale)
                 .value__M(14)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         poundsInStone.addStringValue(ENTITY_NAME, "POUNDS_IN_STONE");
         objects.add(poundsInStone);
@@ -1648,6 +1790,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(stoneScale)
                 .value__M(160)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         stonesInTon.addStringValue(ENTITY_NAME, "STONES_IN_TON");
         objects.add(stonesInTon);
@@ -1658,6 +1801,7 @@ public final class CustomDataset {
                 .represented_M(mass)
                 .uses_M(tonScale)
                 .value__M(3.85809)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         maximumLightGoodsVehicleMassTons.addStringValue(ENTITY_NAME, 
             "MAXIMUM_LIGHT_GOODS_VEHICLE_MASS_TONS");
@@ -1671,6 +1815,7 @@ public final class CustomDataset {
                 .represented_M(lightIntensity)
                 .uses_M(candelaScale)
                 .value__M(1)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         averageCandleLightIntensityCandela.addStringValue(ENTITY_NAME, "AVERAGE_CANDLE_LIGHT_INTENSITY_CANDELA");
         objects.add(averageCandleLightIntensityCandela);
@@ -1683,6 +1828,7 @@ public final class CustomDataset {
                 .represented_M(molarQuantity)
                 .uses_M(moleScale)
                 .value__M(2)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         molesInTwentyFourGramsCarbonTwelve.addStringValue(ENTITY_NAME, 
             "MOLES_IN_TWENTY_FOUR_GRAMS_OF_CARBON_TWELVE");
@@ -1696,6 +1842,7 @@ public final class CustomDataset {
                 .represented_M(electricCurrent)
                 .uses_M(milliampereScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         milliamperesInAmpere.addStringValue(ENTITY_NAME, "MILLIAMPERES_IN_AMPERE");
         objects.add(milliamperesInAmpere);
@@ -1706,6 +1853,7 @@ public final class CustomDataset {
                 .represented_M(electricCurrent)
                 .uses_M(ampereScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         amperesInKiloampere.addStringValue(ENTITY_NAME, "AMPERES_IN_KILOAMPERE");
         objects.add(amperesInKiloampere);
@@ -1716,6 +1864,7 @@ public final class CustomDataset {
                 .represented_M(electricCurrent)
                 .uses_M(kiloampereScale)
                 .value__M(0.4)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         averageColdCrankingKiloamperesForCar.addStringValue(ENTITY_NAME, 
             "AVERAGE_COLD_CRANKING_KILOAMPERES_FOR_CAR");
@@ -1729,6 +1878,7 @@ public final class CustomDataset {
                 .represented_M(electricalPotential)
                 .uses_M(millivoltScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         millivoltsInVolt.addStringValue(ENTITY_NAME, "MILLIVOLTS_IN_VOLT");
         objects.add(millivoltsInVolt);
@@ -1739,6 +1889,7 @@ public final class CustomDataset {
                 .represented_M(electricalPotential)
                 .uses_M(voltScale)
                 .value__M(1000)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         voltsInKilovolt.addStringValue(ENTITY_NAME, "VOLTS_IN_KILOVOLT");
         objects.add(voltsInKilovolt);
@@ -1749,11 +1900,11 @@ public final class CustomDataset {
                 .represented_M(electricalPotential)
                 .uses_M(kilovoltScale)
                 .value__M(400)
+                .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
                 .build();
         maxNationalGridVoltage.addStringValue(ENTITY_NAME, "MAXIMUM_NATIONAL_GRID_VOLTAGE");
         objects.add(maxNationalGridVoltage);
         // End create electrical potential quantities
-        */
         return objects;
     }
                     

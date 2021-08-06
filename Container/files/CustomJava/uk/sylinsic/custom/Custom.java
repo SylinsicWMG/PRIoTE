@@ -52,7 +52,7 @@ public final class Custom {
         // Create/Connect to persistent database stored at `location`, hosting the server on port `port`
         final MagmaCoreJenaDatabase db = new MagmaCoreJenaDatabase("/usr/src/mymaven/data/".concat(location));
     
-        final String graph = "http://www.semanticweb.org/si_units";
+        final String graph = "http://www.semanticweb.org/units_of_measurement";
 
 
         // If db is not already populated, create set of example data objects to store in db.
