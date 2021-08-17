@@ -1,0 +1,31 @@
+<!doctype html>
+<head>
+  <title>{% block title %}{% endblock %} - PRIoTE Interface</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='lists.css') }}">
+
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body>
+  <div class="navbar">
+    <ul>
+        <li class="navbar-item">
+          {% if graph is defined %}<a id="title" href="listAll?graph={{ graph }}">{% else %}<a id="title" href="listAll">{% endif %}PRIoTE web interface</a>
+          
+        </li>
+        <li class="navbar-item" id="searchBar">
+            <form action="search">
+                <input type="text" name="searchString">
+                <input type="hidden" name="graph" value="{{ graph }}">
+                <button type="submit">&#x1F50D;</button>
+            </form>
+        </li>
+    </ul>
+  </div>
+  <section class="content">
+      {% block content %}
+      {% endblock %}
+  </section>
+</body>

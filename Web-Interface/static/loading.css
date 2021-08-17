@@ -1,0 +1,145 @@
+
+/* Edited from https://codepen.io/vitor-siqueira/pen/xNBExN */
+
+.content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navButtons {
+    overflow: visible;
+    width: auto;
+    height: auto;
+    position: absolute;
+}
+
+.button {
+    float: left;
+    display: table-row;
+    margin: 20px;
+    width: 180px;
+    height: 180px;
+    cursor: pointer;
+    background: linear-gradient(15deg, var(--index-button-background-one) 0%, var(--index-button-background-two) 100%);
+    border-radius: 50%;
+}
+  
+.spinner {
+    position: absolute;
+    fill: none;
+    stroke: var(--index-button-stroke-colour);
+    stroke-dashoffset: 100;
+    stroke-dasharray: 100 465;
+    stroke-width: 0px;
+    transition: 1s ease-in-out;
+    overflow: visible;
+}
+
+.spinner:hover {
+    stroke-width: var(--index-button-stroke-width);
+    stroke-dasharray: 565 0;
+    stroke-dashoffset: -565;
+}
+  
+.button span {
+    display: flex;
+    justify-content: center;
+    margin-top: 81px; /* Half (height of box + text height) */
+    color: var(--index-button-text-colour);
+    font-size: var(--index-button-font-size);
+    font-weight: var(--index-button-font-weight);
+    font-style: var(--index-button-font-style);
+    text-decoration: var(--index-button-text-decoration);
+}
+  
+
+
+/*--- Custom settings form ---*/
+#settingsOverlay {
+    width: 100%;
+    height: 100%;
+}
+
+.deactivated {
+    display: none;
+}
+
+.activated {
+    display: flex;
+    background: var(--form-surrounding-background-colour);
+    z-index: 9;
+    align-items: center;
+    justify-content: center;
+}
+
+#settingsForm {
+    background: var(--form-background-colour);
+    opacity: 0.8;   
+    width: 40%;
+    height: 40%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.settingsFormSection {
+    width: 60%;
+    margin: 5px;
+    text-align: center;
+}
+
+.settingsFormLabel {
+    text-align: center;
+    display: inline-block;
+}
+
+.settingsFormInput {
+    text-align: center;
+    float: right;
+    width: inherit;
+}
+
+.formError {
+    color: var(--form-error-text-colour);
+    text-align: center;
+}
+
+/* Adapted from https://codepen.io/brissmyr/pen/egidw */
+#exitSettingsOverlayButton {
+    position: absolute;
+    right: 35px;
+    top: 35px;
+    width: 35px;
+    height: 35px;
+    opacity: 0.3;
+    z-index: 10;
+    transition: ease-out 0.5s;
+    border-radius: 50%;
+}
+
+#exitSettingsOverlayButton:hover {
+    opacity: 1;
+}
+
+#exitSettingsOverlayButton:before, #exitSettingsOverlayButton:after {
+    position: absolute;
+    content: '';
+    height: 33px;
+    width: 3px;
+    background-color: #999;
+    top: -1px;
+    left: 13px;
+}
+
+#exitSettingsOverlayButton:before {
+    transform: rotate(45deg);
+}
+
+#exitSettingsOverlayButton:after {
+    transform: rotate(-45deg);
+}

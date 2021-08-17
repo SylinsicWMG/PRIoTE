@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PRIoTE Homepage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='loading.css') }}">
+    <script type="text/javascript">
+        function loadSettingsDialog() {
+            div = document.getElementById("settingsOverlay");
+            if (div != null) {
+                div.className = "activated";
+            }
+        }
+
+        function hideSettingsDialog() {
+            div = document.getElementById("settingsOverlay");
+            if (div != null) {
+                div.className = "deactivated";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <section class="content">
+        <div class="deactivated" id="settingsOverlay">
+            <button id="exitSettingsOverlayButton" onclick="hideSettingsDialog()"></button>
+            <form action="" id="settingsForm" method="POST" name="settingsForm">
+                <section class="settingsFormSection">
+                    <label for="host" class="settingsFormLabel">Host:</label>
+                    <input type="text" id="host" name="host" placeholder="Host" class="settingsFormInput">
+                </section>
+                <section class="settingsFormSection">
+                    <label for="port" class="settingsFormLabel">Port:</label>
+                    <input type="number" id="port" default="1" min="1" max="65535" name="port" placeholder="Port" class="settingsFormInput">
+                </section>
+                <section class="settingsFormSection">
+                    <label for="database" class="settingsFormLabel">Database:</label>
+                    <input type="text" id="database" name="database" placeholder="Database" class="settingsFormInput">
+                </section>
+                <section class="settingsFormSection">
+                    <input type="hidden" name="location" value="listAll">
+                    <button type="submit" name="submitButton" class="settingsFormButton">Submit</button>
+                </section>
+                {% if missing is defined %}
+                    <section class="settingsFormSection">
+                        <p class="formError">Error: missing/invalid {{ missing }}</p>
+                    </section>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="navButtons">
+            <div class="button" onclick="loadSettingsDialog()">
+                <svg width="180px" height="180px" viewBox="0 0 180 180" class="spinner">
+                    <circle cx="90" cy="90" r="90"></circle>
+                </svg>
+                <span>List Graphs</span>
+            </div>
+        </div>
+        {% if missing is defined %}
+            <img src="" onerror="loadSettingsDialog()">
+        {% endif %}
+    </section>
+</body>
+
+</html>

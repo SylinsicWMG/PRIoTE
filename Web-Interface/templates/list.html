@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}List {{ title_suffix }}{% endblock %}
+
+{% block head %}
+  <script type="text/javascript">
+    function errorAlert(error, errorExtra = null) {
+      if (errorExtra == null) {
+        alert(error);
+      }
+      else {
+        alert(error + "\n" + errorExtra);
+      }
+      window.history.back();
+    }
+  </script>
+{% endblock %}
+
+{% block content %}
+  {% if subjects %}
+    <table>
+      <thead class="tableHeader">
+        {% if queried is defined %}
+          <th class="headerText">{% if ":" in queried %}<a href="listSubject?graph={{ graph }}&subject={{ queried }}">Subject</a>{% else %}Subject{% endif %}</th>
+          <th class="headerText">{% if ":" in queried %}<a href="listPredicate?graph={{ graph }}&predicate={{ queried }}">Predicate</a>{% else %}Predicate{% endif %}</th>
+          <th class="headerText"><a href="listObject?graph={{ graph }}&object={{ queried }}">Object</a></th>
+        {% else %}
+          <th>Subject</th>
+          <th>Predicate</th>
+          <th>Object</th>
+        {% endif %}
+      </thead>
+      <tbody>
+        {% for subject, predicates in subjects.items() %}
+          {% for predicate, object in predicates.items() %}
+            <tr class="tableRow"> 
+              <td class="rowText">{% if ":" in subject %}<a href="listSubject?graph={{ graph }}&subject={{ subject }}">{{ subject }}</a>{% else %}{{ subject }}{% endif %}</td>
+              <td class="rowText">{% if ":" in predicate %}<a href="listPredicate?graph={{ graph }}&predicate={{ predicate }}">{{ predicate }}</a>{% else %}{{ predicate }}{% endif %}</td>
+              <td class="rowText"><a href="listObject?graph={{ graph }}&object={{ object }}">{{ object }}</a></td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+      {% if not queried is defined %}
+        {% set error = "No subject, predicate or object was queried." %}
+      {% elif queryOn == "Search" %}
+        {% set error = "No results were found for query:" %}
+        {% set errorExtra = searchString %}
+      {% else %}
+        {% set error = "No instances found of " + queried + " being a(n) " +  queryOn + "." %}
+        {% set errorExtra = "Returning to previous query." %}
+      {% endif %}
+      {% if errorExtra is defined %}
+        <img src="" onerror="errorAlert('{{ error }}', '{{ errorExtra }}');" />
+      {% else %}
+        <img src="" onerror="errorAlert('{{ error }}');" />
+      {% endif %}
+  {% endif %}
+{% endblock %}

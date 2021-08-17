@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}List {{ title_suffix }}{% endblock %}
+
+{% block head %}
+  <script type="text/javascript">
+    function errorAlert(error, errorExtra = null) {
+      if (errorExtra == null) {
+        alert(error);
+      }
+      else {
+        alert(error + "\n" + errorExtra);
+      }
+      window.history.back();
+    }
+  </script>
+{% endblock %}
+
+{% block content %}
+  {% if graphs %}
+    <table>
+      <thead class="tableHeader">
+        <th class="headerText">Graph</th>
+      </thead>
+      <tbody>
+        {% for index,graph in graphs.items() %}
+          <tr class="tableRow">
+            <td class="rowText"><a href="listAll?graph={{ graph }}">{{ graph }}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    {% set error = "No graphs were found for the specified database endpoint:" %}
+    {% set errorExtra = "http://" + session.host + ":" + session.port + "/" + session.database + "/sparql" %}
+    <img src="" onerror="errorAlert('{{ error }}', '{{ errorExtra }}');" />
+  {% endif %}
+{% endblock %}

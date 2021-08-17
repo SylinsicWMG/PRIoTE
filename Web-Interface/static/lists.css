@@ -1,0 +1,95 @@
+/*--- Table generic ---*/
+table {
+    margin-top: 50px;
+    width: 95%;
+    text-align: center;
+    vertical-align: middle;
+    height: auto;
+    border-collapse: collapse;
+}
+
+/*--- Table cells generic ---*/
+th,td {
+    width: auto;
+    border: var(--table-border);
+}
+
+/*--- Table header ---*/
+.tableHeader {
+    background: var(--table-header-bg);
+    height: var(--table-header-row-height);
+}
+
+.headerText, .headerText a {
+    color: var(--table-header-text-colour);
+    font-family: var(--table-header-font-family);
+    font-size: var(--table-header-font-size);
+    font-style: var(--table-header-font-style);
+    font-weight: var(--table-header-font-weight);
+    text-decoration: var(--table-header-text-decoration);
+}
+
+.headerText a:visited {
+    text-decoration: var(--table-header-text-visited-decoration);
+    font-family: var(--table-header-font-visited-family);
+    font-size: var(--table-header-font-visited-size);
+    font-style: var(--table-header-font-visited-style);
+    font-weight: var(--table-header-font-visited-weight);
+    color: var(--table-header-text-visited-colour);
+}
+
+/*--- Table body ---*/
+/*-- All rows --*/
+.tableRow {
+    height: var(--table-body-row-height);
+    margin: 0px;
+    background: var(--table-body-odd-bg);
+}
+
+/*-- Even row --*/
+.tableRow:nth-child(even) {
+    background: var(--table-body-even-bg);
+}
+
+/*-- All row text --*/
+.tableRow .rowText {
+    color: var(--table-body-odd-text-unlinked-colour);
+    font-family: var(--table-body-font-unlinked-family);
+    font-size: var(--table-body-font-unlinked-size);
+    font-style: var(--table-body-font-unlinked-style);
+    font-weight: var(--table-body-font-unlinked-weight);
+}
+
+/*-- All row text links --*/
+.tableRow .rowText a {
+    color: var(--table-body-odd-text-colour);
+    font-family: var(--table-body-font-family);
+    font-size: var(--table-body-font-size);
+    font-style: var(--table-body-font-style);
+    font-weight: var(--table-body-font-weight);
+    text-decoration: var(--table-body-text-decoration);
+}
+
+/*-- Even row text --*/
+.tableRow:nth-child(even) .rowText {
+    color: var(--table-body-even-text-unlinked-colour);
+}
+
+.tableRow:nth-child(even) .rowText a {
+    color: var(--table-body-even-text-colour);
+}
+
+/*-- Visited row text links --*/
+.rowText a:visited {
+    color: var(--table-body-odd-text-visited-colour);
+    font-family: var(--table-body-font-visited-family);
+    font-size: var(--table-body-font-visited-size);
+    font-style: var(--table-body-font-visited-style);
+    font-weight: var(--table-body-font-visited-weight);
+    text-decoration: var(--table-body-text-visited-decoration);
+}
+
+/*-- Visited row text links --*/
+.tableRow:nth-child(even) .rowText a:visited {
+    color: var(--table-body-even-text-visited-colour);
+}
