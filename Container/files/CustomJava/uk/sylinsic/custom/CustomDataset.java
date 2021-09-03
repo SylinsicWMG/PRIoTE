@@ -4,6 +4,7 @@ import static uk.gov.gchq.hqdm.iri.HQDM.ENTITY_NAME;
 import static uk.gov.gchq.hqdm.iri.HQDM.HQDM;
 import static uk.gov.gchq.magmacore.util.DataObjectUtils.REF_BASE;
 import static uk.gov.gchq.magmacore.util.DataObjectUtils.USER_BASE;
+import static uk.gov.gchq.magmacore.util.DataObjectUtils.uid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,6 @@ import uk.gov.gchq.hqdm.model.impl.RoleImpl;
 import uk.gov.gchq.hqdm.model.impl.ScaleImpl;
 import uk.gov.gchq.hqdm.model.impl.SignImpl;
 import uk.gov.gchq.hqdm.model.impl.UnitOfMeasureImpl;
-
 
 /**
  * Constructs a custom dataset of HQDM objects for demonstrating Magma Core with a central heating system.
@@ -90,34 +90,34 @@ public final class CustomDataset {
 
         // Begin create classes of unit types
         final ClassOfPhysicalQuantity classOfUnits = new ClassOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "class_of_units"))
+            new IRI(REF_BASE, uid()))
             .build();
         classOfUnits.addStringValue(ENTITY_NAME, "CLASS_OF_UNITS");
         objects.add(classOfUnits);
 
         final ClassOfPhysicalQuantity classOfImperialUnits = new ClassOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "class_of_imperial_units"))
+            new IRI(REF_BASE, uid()))
             .has_Superclass(classOfUnits)
             .build();
         classOfImperialUnits.addStringValue(ENTITY_NAME, "CLASS_OF_IMPERIAL_UNITS");
         objects.add(classOfImperialUnits);
         
         final ClassOfPhysicalQuantity classOfMetricUnits = new ClassOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "class_of_metric_units"))
+            new IRI(REF_BASE, uid()))
             .has_Superclass(classOfUnits)
             .build();
         classOfMetricUnits.addStringValue(ENTITY_NAME, "CLASS_OF_METRIC_UNITS");
         objects.add(classOfMetricUnits);
 
         final ClassOfPhysicalQuantity classOfBaseSiUnits = new ClassOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "class_of_base_si_units"))
+            new IRI(REF_BASE, uid()))
             .has_Superclass(classOfMetricUnits)
             .build();
         classOfBaseSiUnits.addStringValue(ENTITY_NAME, "CLASS_OF_BASE_SI_UNITS");
         objects.add(classOfBaseSiUnits);
 
         final ClassOfPhysicalQuantity classOfDerivedSiUnits = new ClassOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "class_of_derived_si_units"))
+            new IRI(REF_BASE, uid()))
             .has_Superclass(classOfBaseSiUnits)
             .build();
         classOfDerivedSiUnits.addStringValue(ENTITY_NAME, "CLASS_OF_DERIVED_SI_UNITS");
@@ -130,21 +130,21 @@ public final class CustomDataset {
 
         // Begin create arbitrary units
         final KindOfPhysicalQuantity kindOfArbitraryUnit = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_arbitrary_unit"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfArbitraryUnit.addStringValue(ENTITY_NAME, "KIND_OF_ARBITRARY_UNIT");
         objects.add(kindOfArbitraryUnit);
 
         final UnitOfMeasure unitlessUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "unitless_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfUnits)
             .build();
         unitlessUnit.addStringValue(ENTITY_NAME, "UNITLESS_UNIT");
         objects.add(unitlessUnit);
 
         final Scale unitlessScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "unitless_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArbitraryUnit)
             .member__Of(classOfUnits)
             .unit(unitlessUnit)
@@ -155,28 +155,28 @@ public final class CustomDataset {
 
         // Begin create temperature units
         final KindOfPhysicalQuantity kindOfTemperature = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_temperature"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfTemperature.addStringValue(ENTITY_NAME, "KIND_OF_TEMPERATURE");
         objects.add(kindOfTemperature);
 
         final PhysicalQuantity temperature = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "temperature"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfTemperature)
             .build();
         temperature.addStringValue(ENTITY_NAME, "TEMPERATURE");
         objects.add(temperature);
         
         final UnitOfMeasure degreesCelsiusUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "degrees_celsius_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfDerivedSiUnits)
             .build();
         degreesCelsiusUnit.addStringValue(ENTITY_NAME, "DEGREES_CELSIUS_UNIT");
         objects.add(degreesCelsiusUnit);
 
         final Scale degreesCelsiusScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "degrees_celsius_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfTemperature)
             .member__Of(classOfDerivedSiUnits)
             .unit(degreesCelsiusUnit)
@@ -185,14 +185,14 @@ public final class CustomDataset {
         objects.add(degreesCelsiusScale);
 
         final UnitOfMeasure degreesKelvinUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "degrees_kelvin_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfBaseSiUnits)
             .build();
         degreesKelvinUnit.addStringValue(ENTITY_NAME, "DEGREES_KELVIN_UNIT");
         objects.add(degreesKelvinUnit);
 
         final Scale degreesKelvinScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "degrees_kelvin_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfTemperature)
             .member__Of(classOfBaseSiUnits)
             .unit(degreesKelvinUnit)
@@ -203,28 +203,28 @@ public final class CustomDataset {
 
         // Begin create duration units
         final KindOfPhysicalQuantity kindOfDuration = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_duration"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfDuration.addStringValue(ENTITY_NAME, "KIND_OF_DURATION");
         objects.add(kindOfDuration);
 
         final PhysicalQuantity duration = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "duration"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfDuration)
             .build();
         duration.addStringValue(ENTITY_NAME, "DURATION");
         objects.add(duration);
 
         final UnitOfMeasure millisecondUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "millisecond_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         millisecondUnit.addStringValue(ENTITY_NAME, "MILLISECOND_UNIT");
         objects.add(millisecondUnit);
 
         final Scale millisecondScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "millisecond_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfMetricUnits)
             .unit(millisecondUnit)
@@ -233,14 +233,14 @@ public final class CustomDataset {
         objects.add(millisecondScale);
 
         final UnitOfMeasure secondUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "second_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfBaseSiUnits)
             .build();
         secondUnit.addStringValue(ENTITY_NAME, "SECOND_UNIT");
         objects.add(secondUnit);
 
         final Scale secondScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "second_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfBaseSiUnits)
             .unit(secondUnit)
@@ -249,14 +249,14 @@ public final class CustomDataset {
         objects.add(secondScale);
 
         final UnitOfMeasure minuteUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "minute_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         minuteUnit.addStringValue(ENTITY_NAME, "MINUTE_UNIT");
         objects.add(minuteUnit);
 
         final Scale minuteScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "minute_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(minuteUnit)
@@ -265,14 +265,14 @@ public final class CustomDataset {
         objects.add(minuteScale);
         
         final UnitOfMeasure hourUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "hour_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         hourUnit.addStringValue(ENTITY_NAME, "HOUR_UNIT");
         objects.add(hourUnit);
         
         final Scale hourScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "hour_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(hourUnit)
@@ -281,14 +281,14 @@ public final class CustomDataset {
         objects.add(hourScale);
 
         final UnitOfMeasure dayUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "day_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         dayUnit.addStringValue(ENTITY_NAME, "DAY_UNIT");
         objects.add(dayUnit);
         
         final Scale dayScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "day_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfMetricUnits)
             .unit(dayUnit)
@@ -297,14 +297,14 @@ public final class CustomDataset {
         objects.add(dayScale);
 
         final UnitOfMeasure weekUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "week_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         weekUnit.addStringValue(ENTITY_NAME, "WEEK_UNIT");
         objects.add(weekUnit);
         
         final Scale weekScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "week_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(weekUnit)
@@ -313,14 +313,14 @@ public final class CustomDataset {
         objects.add(weekScale);
 
         final UnitOfMeasure monthUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "month_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         monthUnit.addStringValue(ENTITY_NAME, "MONTH_UNIT");
         objects.add(monthUnit);
         
         final Scale monthScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "month_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(monthUnit)
@@ -329,14 +329,14 @@ public final class CustomDataset {
         objects.add(monthScale);
 
         final UnitOfMeasure yearUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "year_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         yearUnit.addStringValue(ENTITY_NAME, "YEAR_UNIT");
         objects.add(yearUnit);
         
         final Scale yearScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "year_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfImperialUnits)
             .unit(yearUnit)
@@ -347,28 +347,28 @@ public final class CustomDataset {
 
         // Begin create angle units
         final KindOfPhysicalQuantity kindOfAngle = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_angle"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfAngle.addStringValue(ENTITY_NAME, "KIND_OF_ANGLE");
         objects.add(kindOfAngle);
 
         final PhysicalQuantity angle = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "angle"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfAngle)
             .build();
         angle.addStringValue(ENTITY_NAME, "ANGLE");
         objects.add(angle);
 
         final UnitOfMeasure radianUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "radian_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfDerivedSiUnits)
             .build();
         radianUnit.addStringValue(ENTITY_NAME, "RADIAN_UNIT");
         objects.add(radianUnit);
 
         final Scale radianScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "radian_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfDerivedSiUnits)
             .unit(radianUnit)
@@ -377,14 +377,14 @@ public final class CustomDataset {
         objects.add(radianScale);
 
         final UnitOfMeasure degreeUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "degree_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         degreeUnit.addStringValue(ENTITY_NAME, "DEGREE_UNIT");
         objects.add(degreeUnit);
 
         final Scale degreeScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "degree_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDuration)
             .member__Of(classOfMetricUnits)
             .unit(degreeUnit)
@@ -395,14 +395,14 @@ public final class CustomDataset {
 
         // Begin create distance units
         final KindOfPhysicalQuantity kindOfDistance = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_distance"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfDistance.addStringValue(ENTITY_NAME, "KIND_OF_DISTANCE");
         objects.add(kindOfDistance);
 
         final PhysicalQuantity distance = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "distance"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfDistance)
             .build();
         distance.addStringValue(ENTITY_NAME, "DISTANCE");
@@ -410,14 +410,14 @@ public final class CustomDataset {
  
         // Metric measurements
         final UnitOfMeasure millimetreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "millimetre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         millimetreUnit.addStringValue(ENTITY_NAME, "MILLIMETRE_UNIT");
         objects.add(millimetreUnit);
 
         final Scale millimetreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "millimetre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfMetricUnits)
             .unit(millimetreUnit)
@@ -426,14 +426,14 @@ public final class CustomDataset {
         objects.add(millimetreScale);
         
         final UnitOfMeasure centimetreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "centimetre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         centimetreUnit.addStringValue(ENTITY_NAME, "CENTIMETRE_UNIT");
         objects.add(centimetreUnit);
 
         final Scale centimetreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "centimetre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfMetricUnits)
             .unit(centimetreUnit)
@@ -442,14 +442,14 @@ public final class CustomDataset {
         objects.add(centimetreScale);
         
         final UnitOfMeasure metreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "metre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfBaseSiUnits)
             .build();
         metreUnit.addStringValue(ENTITY_NAME, "METRE_UNIT");
         objects.add(metreUnit);
 
         final Scale metreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "metre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfBaseSiUnits)
             .unit(metreUnit)
@@ -458,14 +458,14 @@ public final class CustomDataset {
         objects.add(metreScale);
         
         final UnitOfMeasure kilometreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "kilometre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         kilometreUnit.addStringValue(ENTITY_NAME, "KILOMETRE_UNIT");
         objects.add(kilometreUnit);
 
         final Scale kilometreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "kilometre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfMetricUnits)
             .unit(kilometreUnit)
@@ -475,14 +475,14 @@ public final class CustomDataset {
 
         // Imperial measurements
         final UnitOfMeasure inchUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "inch_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         inchUnit.addStringValue(ENTITY_NAME, "INCH_UNIT");
         objects.add(inchUnit);
         
         final Scale inchScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "inch_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfImperialUnits)
             .unit(inchUnit)
@@ -491,14 +491,14 @@ public final class CustomDataset {
         objects.add(inchScale);
 
         final UnitOfMeasure footUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "foot_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         footUnit.addStringValue(ENTITY_NAME, "FOOT_UNIT");
         objects.add(footUnit);
 
         final Scale footScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "foot_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfImperialUnits)
             .unit(footUnit)
@@ -507,14 +507,14 @@ public final class CustomDataset {
         objects.add(footScale);
 
         final UnitOfMeasure yardUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "yard_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         yardUnit.addStringValue(ENTITY_NAME, "YARD_UNIT");
         objects.add(yardUnit);
 
         final Scale yardScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "yard_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfImperialUnits)
             .unit(yardUnit)
@@ -523,14 +523,14 @@ public final class CustomDataset {
         objects.add(yardScale);
 
         final UnitOfMeasure mileUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "mile_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         mileUnit.addStringValue(ENTITY_NAME, "MILE_UNIT");
         objects.add(mileUnit);
 
         final Scale mileScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "mile_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfImperialUnits)
             .unit(mileUnit)
@@ -539,14 +539,14 @@ public final class CustomDataset {
         objects.add(mileScale);
 
         final UnitOfMeasure nauticalMileUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "nautical_mile_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         nauticalMileUnit.addStringValue(ENTITY_NAME, "NAUTICAL_MILE_UNIT");
         objects.add(nauticalMileUnit);
 
         final Scale nauticalMileScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "nautical_mile_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfDistance)
             .member__Of(classOfImperialUnits)
             .unit(nauticalMileUnit)
@@ -557,14 +557,14 @@ public final class CustomDataset {
 
         // Begin create area units
         final KindOfPhysicalQuantity kindOfArea = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_area"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfArea.addStringValue(ENTITY_NAME, "KIND_OF_AREA");
         objects.add(kindOfArea);
                 
         final PhysicalQuantity area = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "area"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfArea)
             .build();
         area.addStringValue(ENTITY_NAME, "area");
@@ -572,14 +572,14 @@ public final class CustomDataset {
 
         // Metric units
         final UnitOfMeasure squareCentimetreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "square_centimetre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         squareCentimetreUnit.addStringValue(ENTITY_NAME, "SQUARE_CENTIMETRE_UNIT");
         objects.add(squareCentimetreUnit);
 
         final Scale squareCentimetreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "square_centimetre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfMetricUnits)
             .unit(squareCentimetreUnit)
@@ -588,14 +588,14 @@ public final class CustomDataset {
         objects.add(squareCentimetreScale);
 
         final UnitOfMeasure squareMetreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "square_metre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         squareMetreUnit.addStringValue(ENTITY_NAME, "SQUARE_METRE_UNIT");
         objects.add(squareMetreUnit);
 
         final Scale squareMetreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "square_metre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfDerivedSiUnits)
             .unit(squareMetreUnit)
@@ -604,14 +604,14 @@ public final class CustomDataset {
         objects.add(squareMetreScale);
 
         final UnitOfMeasure squareKilometreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "square_kilometre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         squareKilometreUnit.addStringValue(ENTITY_NAME, "SQUARE_KILOMETRE_UNIT");
         objects.add(squareKilometreUnit);
 
         final Scale squareKilometreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "square_kilometre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfMetricUnits)
             .unit(squareKilometreUnit)
@@ -621,14 +621,14 @@ public final class CustomDataset {
 
         // Imperial units
         final UnitOfMeasure squareInchUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "square_inch_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         squareInchUnit.addStringValue(ENTITY_NAME, "SQUARE_INCH_UNIT");
         objects.add(squareInchUnit);
 
         final Scale squareInchScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "square_inch_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
             .unit(squareInchUnit)
@@ -637,14 +637,14 @@ public final class CustomDataset {
         objects.add(squareInchScale);
 
         final UnitOfMeasure squareFootUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "square_foot_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         squareFootUnit.addStringValue(ENTITY_NAME, "SQUARE_FOOT_UNIT");
         objects.add(squareFootUnit);
 
         final Scale squareFootScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "square_foot_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
             .unit(squareFootUnit)
@@ -653,14 +653,14 @@ public final class CustomDataset {
         objects.add(squareFootScale);
 
         final UnitOfMeasure squareYardUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "square_yard_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         squareYardUnit.addStringValue(ENTITY_NAME, "SQUARE_YARD_UNIT");
         objects.add(squareYardUnit);
 
         final Scale squareYardScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "square_yard_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
             .unit(squareYardUnit)
@@ -669,14 +669,14 @@ public final class CustomDataset {
         objects.add(squareYardScale);
 
         final UnitOfMeasure squareMileUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "square_mile_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         squareMileUnit.addStringValue(ENTITY_NAME, "SQUARE_MILE_UNIT");
         objects.add(squareMileUnit);
 
         final Scale squareMileScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "square_mile_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
             .unit(squareMileUnit)
@@ -685,14 +685,14 @@ public final class CustomDataset {
         objects.add(squareMileScale);
 
         final UnitOfMeasure acreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "acre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         acreUnit.addStringValue(ENTITY_NAME, "ACRE_UNIT");
         objects.add(acreUnit);
 
         final Scale acreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "acre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfArea)
             .member__Of(classOfImperialUnits)
             .unit(acreUnit)
@@ -703,14 +703,14 @@ public final class CustomDataset {
 
         // Begin create volume units
         final KindOfPhysicalQuantity kindOfVolume = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_volume"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfVolume.addStringValue(ENTITY_NAME, "KIND_OF_VOLUME");
         objects.add(kindOfVolume);
         
         final PhysicalQuantity volume = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "volume"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfVolume)
             .build();
         volume.addStringValue(ENTITY_NAME, "VOLUME");
@@ -718,14 +718,14 @@ public final class CustomDataset {
 
         // Metric units
         final UnitOfMeasure cubicCentimetreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "cubic_centimetre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         cubicCentimetreUnit.addStringValue(ENTITY_NAME, "CUBIC_CENTIMETRE_UNIT");
         objects.add(cubicCentimetreUnit);
 
         final Scale cubicCentimetreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "cubic_centimetre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfMetricUnits)
             .unit(cubicCentimetreUnit)
@@ -735,14 +735,14 @@ public final class CustomDataset {
         objects.add(cubicCentimetreScale);
 
         final UnitOfMeasure cubicDecimetreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "cubic_decimetre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         cubicDecimetreUnit.addStringValue(ENTITY_NAME, "CUBIC_DECIMETRE_UNIT");
         objects.add(cubicDecimetreUnit);
 
         final Scale cubicDecimetreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "cubic_decimetre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfMetricUnits)
             .unit(cubicDecimetreUnit)
@@ -752,14 +752,14 @@ public final class CustomDataset {
         objects.add(cubicDecimetreScale);
         
         final UnitOfMeasure cubicMetreUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "cubic_metre_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         cubicMetreUnit.addStringValue(ENTITY_NAME, "CUBIC_METRE_UNIT");
         objects.add(cubicMetreUnit);
 
         final Scale cubicMetreScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "cubic_metre_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfDerivedSiUnits)
             .build();
@@ -769,14 +769,14 @@ public final class CustomDataset {
 
         // Imperial units
         final UnitOfMeasure cubicInchUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "cubic_inch_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         cubicInchUnit.addStringValue(ENTITY_NAME, "CUBIC_INCH_UNIT");
         objects.add(cubicInchUnit);
 
         final Scale cubicInchScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "cubic_inch_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
             .unit(cubicInchUnit)
@@ -785,14 +785,14 @@ public final class CustomDataset {
         objects.add(cubicInchScale);
 
         final UnitOfMeasure cubicFeetUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "cubic_feet_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         cubicFeetUnit.addStringValue(ENTITY_NAME, "CUBIC_FEET_UNIT");
         objects.add(cubicFeetUnit);
 
         final Scale cubicFeetScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "cubic_feet_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
             .unit(cubicFeetUnit)
@@ -801,14 +801,14 @@ public final class CustomDataset {
         objects.add(cubicFeetScale);
 
         final UnitOfMeasure fluidOunceUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "fluid_ounce_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         fluidOunceUnit.addStringValue(ENTITY_NAME, "FLUID_OUNCE_UNIT");
         objects.add(fluidOunceUnit);
 
         final Scale fluidOunceScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "fluid_ounce_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
             .unit(fluidOunceUnit)
@@ -817,14 +817,14 @@ public final class CustomDataset {
         objects.add(fluidOunceScale);
 
         final UnitOfMeasure pintUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "pint_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         pintUnit.addStringValue(ENTITY_NAME, "PINT_UNIT");
         objects.add(pintUnit);
 
         final Scale pintScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "pint_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
             .unit(pintUnit)
@@ -833,14 +833,14 @@ public final class CustomDataset {
         objects.add(pintScale);
 
         final UnitOfMeasure quartUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "quart_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         quartUnit.addStringValue(ENTITY_NAME, "QUART_UNIT");
         objects.add(quartUnit);
 
         final Scale quartScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "quart_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
             .unit(quartUnit)
@@ -849,14 +849,14 @@ public final class CustomDataset {
         objects.add(quartScale);
 
         final UnitOfMeasure gallonUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "gallon_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         gallonUnit.addStringValue(ENTITY_NAME, "GALLON_UNIT");
         objects.add(gallonUnit);
 
         final Scale gallonScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "gallon_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfVolume)
             .member__Of(classOfImperialUnits)
             .unit(gallonUnit)
@@ -867,14 +867,14 @@ public final class CustomDataset {
 
         // Begin create mass units
         final KindOfPhysicalQuantity kindOfMass = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_mass"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfMass.addStringValue(ENTITY_NAME, "KIND_OF_MASS");
         objects.add(kindOfMass);
 
         final PhysicalQuantity mass = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "mass"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfMass)
             .build();
         mass.addStringValue(ENTITY_NAME, "MASS");
@@ -882,14 +882,14 @@ public final class CustomDataset {
 
         // Metric units
         final UnitOfMeasure milligramUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "milligram_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         milligramUnit.addStringValue(ENTITY_NAME, "MILLIGRAM_UNIT");
         objects.add(milligramUnit);
 
         final Scale milligramScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "milligram_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfMetricUnits)
             .unit(milligramUnit)
@@ -898,14 +898,14 @@ public final class CustomDataset {
         objects.add(milligramScale);
 
         final UnitOfMeasure gramUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "gram_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         gramUnit.addStringValue(ENTITY_NAME, "GRAM_UNIT");
         objects.add(gramUnit);
 
         final Scale gramScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "gram_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfMetricUnits)
             .unit(gramUnit)
@@ -914,14 +914,14 @@ public final class CustomDataset {
         objects.add(gramScale);
 
         final UnitOfMeasure kilogramUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "kilogram_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfBaseSiUnits)
             .build();
         kilogramUnit.addStringValue(ENTITY_NAME, "KILOGRAM_UNIT");
         objects.add(kilogramUnit);
 
         final Scale kilogramScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "kilogram_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfBaseSiUnits)
             .unit(kilogramUnit)
@@ -930,14 +930,14 @@ public final class CustomDataset {
         objects.add(kilogramScale);
 
         final UnitOfMeasure tonneUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "tonne_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         tonneUnit.addStringValue(ENTITY_NAME, "TONNE_UNIT");
         objects.add(tonneUnit);
 
         final Scale tonneScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "tonne_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfMetricUnits)
             .unit(tonneUnit)
@@ -947,14 +947,14 @@ public final class CustomDataset {
 
         // Imperial units
         final UnitOfMeasure ounceUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "ounce_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         ounceUnit.addStringValue(ENTITY_NAME, "OUNCE_UNIT");
         objects.add(ounceUnit);
 
         final Scale ounceScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "ounce_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfImperialUnits)
             .unit(ounceUnit)
@@ -963,14 +963,14 @@ public final class CustomDataset {
         objects.add(ounceScale);
 
         final UnitOfMeasure poundUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "pound_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         poundUnit.addStringValue(ENTITY_NAME, "POUND_UNIT");
         objects.add(poundUnit);
 
         final Scale poundScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "pound_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfImperialUnits)
             .unit(poundUnit)
@@ -979,14 +979,14 @@ public final class CustomDataset {
         objects.add(poundScale);
 
         final UnitOfMeasure stoneUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "stone_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         stoneUnit.addStringValue(ENTITY_NAME, "STONE_UNIT");
         objects.add(stoneUnit);
 
         final Scale stoneScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "stone_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfImperialUnits)
             .unit(stoneUnit)
@@ -995,14 +995,14 @@ public final class CustomDataset {
         objects.add(stoneScale);
 
         final UnitOfMeasure tonUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "ton_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfImperialUnits)
             .build();
         tonUnit.addStringValue(ENTITY_NAME, "TON_UNIT");
         objects.add(tonUnit);
 
         final Scale tonScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "ton_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMass)
             .member__Of(classOfImperialUnits)
             .unit(tonUnit)
@@ -1013,28 +1013,28 @@ public final class CustomDataset {
         
         // Begin create light units
         final KindOfPhysicalQuantity kindOfLightIntensity = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_light_intensity"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfLightIntensity.addStringValue(ENTITY_NAME, "KIND_OF_LIGHT_INTENSITY");
         objects.add(kindOfLightIntensity);
 
         final PhysicalQuantity lightIntensity = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "light_intensity"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfLightIntensity)
             .build();
         lightIntensity.addStringValue(ENTITY_NAME, "LIGHT_INTENSITY");
         objects.add(lightIntensity);
 
         final UnitOfMeasure candelaUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "candela_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfBaseSiUnits)
             .build();
         candelaUnit.addStringValue(ENTITY_NAME, "CANDELA_UNIT");
         objects.add(candelaUnit);
 
         final Scale candelaScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "candela_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfLightIntensity)
             .member__Of(classOfBaseSiUnits)
             .unit(candelaUnit)
@@ -1045,28 +1045,28 @@ public final class CustomDataset {
 
         // Begin create molecular units
         final KindOfPhysicalQuantity kindOfMolarQuantity = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_molar_quantity"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfMolarQuantity.addStringValue(ENTITY_NAME, "KIND_OF_MOLAR_QUANTITY");
         objects.add(kindOfMolarQuantity);
 
         final PhysicalQuantity molarQuantity = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "molar_quantity"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfMolarQuantity)
             .build();
         molarQuantity.addStringValue(ENTITY_NAME, "MOLAR_QUANTITY");
         objects.add(molarQuantity);
 
         final UnitOfMeasure moleUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "mole_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfBaseSiUnits)
             .build();
         moleUnit.addStringValue(ENTITY_NAME, "MOLE_UNIT");
         objects.add(moleUnit);
 
         final Scale moleScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "mole_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfMolarQuantity)
             .member__Of(classOfBaseSiUnits)
             .unit(moleUnit)
@@ -1077,28 +1077,28 @@ public final class CustomDataset {
 
         // Begin create electrical current units
         final KindOfPhysicalQuantity kindOfElectricCurrent = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_electrical_current"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfElectricCurrent.addStringValue(ENTITY_NAME, "KIND_OF_ELECTRICAL_CURRENT");
         objects.add(kindOfElectricCurrent);
 
         final PhysicalQuantity electricCurrent = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "electrical_current"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfElectricCurrent)
             .build();
         electricCurrent.addStringValue(ENTITY_NAME, "ELECTRIC_CURRENT");
         objects.add(electricCurrent);
 
         final UnitOfMeasure milliampereUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "milliampere_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         milliampereUnit.addStringValue(ENTITY_NAME, "MILLIAMPERE_UNIT");
         objects.add(milliampereUnit);
 
         final Scale milliampereScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "milliampere_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfElectricCurrent)
             .member__Of(classOfMetricUnits)
             .unit(milliampereUnit)
@@ -1107,14 +1107,14 @@ public final class CustomDataset {
         objects.add(milliampereScale);
 
         final UnitOfMeasure ampereUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "ampere_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfBaseSiUnits)
             .build();
         ampereUnit.addStringValue(ENTITY_NAME, "AMPERE_UNIT");
         objects.add(ampereUnit);
 
         final Scale ampereScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "ampere_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfElectricCurrent)
             .member__Of(classOfBaseSiUnits)
             .unit(ampereUnit)
@@ -1123,14 +1123,14 @@ public final class CustomDataset {
         objects.add(ampereScale);
 
         final UnitOfMeasure kiloampereUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "kiloampere_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         kiloampereUnit.addStringValue(ENTITY_NAME, "KILOAMPERE_UNIT");
         objects.add(kiloampereUnit);
 
         final Scale kiloampereScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "kiloampere_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfElectricCurrent)
             .member__Of(classOfMetricUnits)
             .unit(kiloampereUnit)
@@ -1141,28 +1141,28 @@ public final class CustomDataset {
 
         // Begin create electrical potential units
         final KindOfPhysicalQuantity kindOfElectricalPotential = new KindOfPhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "kind_of_electrical_potential"))
+            new IRI(REF_BASE, uid()))
             .member_Of(classOfUnits)
             .build();
         kindOfElectricalPotential.addStringValue(ENTITY_NAME, "KIND_OF_ELECTRICAL_POTENTIAL");
         objects.add(kindOfElectricalPotential);
 
         final PhysicalQuantity electricalPotential = new PhysicalQuantityImpl.Builder(
-            new IRI(REF_BASE, "electrical_potential"))
+            new IRI(REF_BASE, uid()))
             .member_Of_Kind_M(kindOfElectricalPotential)
             .build();
         electricalPotential.addStringValue(ENTITY_NAME, "ELECTRICAL_POTENTIAL");
         objects.add(electricalPotential);
 
         final UnitOfMeasure millivoltUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "millivolt_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         millivoltUnit.addStringValue(ENTITY_NAME, "MILLIVOLT_UNIT");
         objects.add(millivoltUnit);
 
         final Scale millivoltScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "millivolt_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfElectricalPotential)
             .member__Of(classOfMetricUnits)
             .unit(millivoltUnit)
@@ -1171,14 +1171,14 @@ public final class CustomDataset {
         objects.add(millivoltScale);
 
         final UnitOfMeasure voltUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "volt_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfDerivedSiUnits)
             .build();
         voltUnit.addStringValue(ENTITY_NAME, "VOLT_UNIT");
         objects.add(voltUnit);
 
         final Scale voltScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "volt_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfElectricalPotential)
             .member__Of(classOfDerivedSiUnits)
             .unit(voltUnit)
@@ -1187,14 +1187,14 @@ public final class CustomDataset {
         objects.add(voltScale);
 
         final UnitOfMeasure kilovoltUnit = new UnitOfMeasureImpl.Builder(
-            new IRI(REF_BASE, "kilovolt_unit"))
+            new IRI(REF_BASE, uid()))
             .member__Of(classOfMetricUnits)
             .build();
         kilovoltUnit.addStringValue(ENTITY_NAME, "KILOVOLT_UNIT");
         objects.add(kilovoltUnit);
 
         final Scale kilovoltScale = new ScaleImpl.Builder(
-            new IRI(REF_BASE, "kilovolt_scale"))
+            new IRI(REF_BASE, uid()))
             .domain_M(kindOfElectricalPotential)
             .member__Of(classOfMetricUnits)
             .unit(kilovoltUnit)
@@ -1204,25 +1204,25 @@ public final class CustomDataset {
         // End create electrical potential units
         
         // Begin create recognising language community
-        final PossibleWorld world = new PossibleWorldImpl(new IRI(REF_BASE, "world"));
+        final PossibleWorld world = new PossibleWorldImpl(new IRI(REF_BASE, uid()));
         world.addStringValue(ENTITY_NAME, "WORLD");
         objects.add(world);
 
         final Pattern quantityUnitPattern = new PatternImpl.Builder(
-            new IRI(REF_BASE, "quantity_unit_pattern"))
+            new IRI(REF_BASE, uid()))
             .build();
         quantityUnitPattern.addStringValue(ENTITY_NAME, "QUANTITY_UNIT_PATTERN");
         objects.add(quantityUnitPattern);
         
         final Role communityRole = new RoleImpl.Builder(
-            new IRI(REF_BASE, "community_role"))
+            new IRI(REF_BASE, uid()))
             .build();
         communityRole.addStringValue(ENTITY_NAME, "COMMUNITY_ROLE");
         objects.add(communityRole);
 
         final RecognizingLanguageCommunity communityUnderstandingUnitsOfMeasurement = new 
             RecognizingLanguageCommunityImpl.Builder(
-                new IRI(REF_BASE, "community_understanding_units_of_measurement"))
+                new IRI(REF_BASE, uid()))
                 .member_Of_Kind_M(communityRole)
                 .part_Of_Possible_World_M(world)
                 .build();
@@ -1232,7 +1232,7 @@ public final class CustomDataset {
 
         final RepresentationByPattern quantityUnitPatternRepresentation = new 
             RepresentationByPatternImpl.Builder(
-            new IRI(REF_BASE, "quantity_unit_pattern_representation"))
+            new IRI(REF_BASE, uid()))
             .consists_Of_By_Class_M(quantityUnitPattern)
             .consists_Of_In_Members_M(communityUnderstandingUnitsOfMeasurement)
             .represented_M(quantityUnitPattern)
@@ -1242,13 +1242,13 @@ public final class CustomDataset {
         objects.add(quantityUnitPatternRepresentation);
 
         final KindOfAssociation quantityUnitAssociationKind = new KindOfAssociationImpl.Builder(
-            new IRI(REF_BASE, "class_of_quantity_unit_representation"))
+            new IRI(REF_BASE, uid()))
             .build();
         quantityUnitAssociationKind.addStringValue(ENTITY_NAME, "CLASS_OF_QUANTITY_UNIT_REPRESENTATION");
         objects.add(quantityUnitAssociationKind);
 
         final RepresentationBySign quantitySignRepresentation = new RepresentationBySignImpl.Builder(
-            new IRI(REF_BASE, "quantity_sign_representation"))
+            new IRI(REF_BASE, uid()))
             .consists_Of_(communityUnderstandingUnitsOfMeasurement)
             .member_Of__M(quantityUnitPatternRepresentation)
             .member_Of_Kind_M(quantityUnitAssociationKind)
@@ -1259,7 +1259,7 @@ public final class CustomDataset {
         objects.add(quantitySignRepresentation);
 
         final RepresentationBySign unitSignRepresentation = new RepresentationBySignImpl.Builder(
-            new IRI(REF_BASE, "unit_sign_representation"))
+            new IRI(REF_BASE, uid()))
             .consists_Of_(communityUnderstandingUnitsOfMeasurement)
             .member_Of__M(quantityUnitPatternRepresentation)
             .member_Of_Kind_M(quantityUnitAssociationKind)
@@ -1270,7 +1270,7 @@ public final class CustomDataset {
         objects.add(unitSignRepresentation);
 
         final Sign quantitySign = new SignImpl.Builder(
-            new IRI(REF_BASE, "quantity_sign"))
+            new IRI(REF_BASE, uid()))
             .member_Of__M(quantityUnitPattern)
             .part_Of_Possible_World_M(world)
             .participant_In_M(quantitySignRepresentation)
@@ -1279,7 +1279,7 @@ public final class CustomDataset {
         objects.add(quantitySign);
 
         final Sign unitSign = new SignImpl.Builder(
-            new IRI(REF_BASE, "measurement_sign"))
+            new IRI(REF_BASE, uid()))
             .member_Of__M(quantityUnitPattern)
             .part_Of_Possible_World_M(world)
             .participant_In_M(unitSignRepresentation)
@@ -1291,7 +1291,7 @@ public final class CustomDataset {
         // Begin create temperature quantities
         final IdentificationOfPhysicalQuantity roomTempCelsius = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "room_temp_celsius"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(temperature)
                 .uses_M(degreesCelsiusScale)
                 .value__M(21.0)
@@ -1302,7 +1302,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity bodyTempKelvin = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "body_temp_kelvin"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(temperature)
                 .uses_M(degreesKelvinScale)
                 .value__M(310.15)
@@ -1315,7 +1315,7 @@ public final class CustomDataset {
         // Begin create time quantities
         final IdentificationOfPhysicalQuantity averageBlinkTime = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "average_blink_time"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(millisecondScale)
                 .value__M(100)
@@ -1326,7 +1326,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity oneHundredMetreRecord = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "one_hundred_metre_record"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(secondScale)
                 .value__M(9.58)
@@ -1337,7 +1337,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity minimumTimeOfFootballGame = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "minimum_time_of_football_game"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(minuteScale)
                 .value__M(80)
@@ -1348,7 +1348,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity averagePrivatePilotLicenseWorkTime = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "average_private_pilot_license_work_time"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(hourScale)
                 .value__M(60)
@@ -1359,7 +1359,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity leapYearDays = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "leap_year_days"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(dayScale)
                 .value__M(366)
@@ -1370,7 +1370,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity schoolYearWeeks = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "school_year_weeks"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(weekScale)
                 .value__M(39)
@@ -1381,7 +1381,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity pregnancyMonths = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "pregnancy_months"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(monthScale)
                 .value__M(9)
@@ -1392,7 +1392,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity sixthFormYears = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "sixth_form_years"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(duration)
                 .uses_M(yearScale)
                 .value__M(2)
@@ -1405,7 +1405,7 @@ public final class CustomDataset {
         // Begin create angle quantities
         final IdentificationOfPhysicalQuantity radiansInCircle = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "radians_in_circle"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(angle)
                 .uses_M(radianScale)
                 .value__M(6.28)
@@ -1416,7 +1416,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity degreesInCircle = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "degrees_in_circle"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(angle)
                 .uses_M(degreeScale)
                 .value__M(360)
@@ -1430,7 +1430,7 @@ public final class CustomDataset {
         // Metric measurements
         final IdentificationOfPhysicalQuantity millimetresInCentimetre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "millimetres_in_centimetre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(millimetreScale)
                 .value__M(10)
@@ -1441,7 +1441,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity centimetresInMetre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "centimetres_in_metre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(centimetreScale)
                 .value__M(100)
@@ -1452,7 +1452,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity metresInKilometre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "metres_in_kilometre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(metreScale)
                 .value__M(1000)
@@ -1463,7 +1463,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity approximateHeightOfIssKilometres = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "approximate_height_of_iss_kilometres"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(kilometreScale)
                 .value__M(420)
@@ -1475,7 +1475,7 @@ public final class CustomDataset {
         // Imperial measurements
         final IdentificationOfPhysicalQuantity inchesInFoot = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "inches_in_foot"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(inchScale)
                 .value__M(12)
@@ -1486,7 +1486,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity feetInYard = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "feet_in_yard"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(footScale)
                 .value__M(3)
@@ -1497,7 +1497,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity yardsInMile = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "yards_in_mile"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(yardScale)
                 .value__M(1760)
@@ -1508,7 +1508,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity approximateHeightOfIssMiles = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "approximate_height_of_iss_miles"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(distance)
                 .uses_M(mileScale)
                 .value__M(260)
@@ -1522,7 +1522,7 @@ public final class CustomDataset {
         // Metric measurements
         final IdentificationOfPhysicalQuantity squareCentimetresInSquareMetre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "square_centimetres_in_square_metre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(squareCentimetreScale)
                 .value__M(10000)
@@ -1533,7 +1533,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity squareMetresInSquareKilometre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "square_metres_in_square_kilometre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(squareMetreScale)
                 .value__M(1000000)
@@ -1544,7 +1544,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity areaOfEnglandInSquareKilometres = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "area_of_england_in_square_kilometres"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(squareKilometreScale)
                 .value__M(130279)
@@ -1556,7 +1556,7 @@ public final class CustomDataset {
         // Imperial measurements
         final IdentificationOfPhysicalQuantity squareInchesInSquareFoot = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "square_inches_in_square_foot"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(squareInchScale)
                 .value__M(144)
@@ -1567,7 +1567,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity squareFeetInSquareYard = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "square_feet_in_square_yard"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(squareFootScale)
                 .value__M(9)
@@ -1578,7 +1578,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity squareYardsInAcre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "square_yards_in_acre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(squareYardScale)
                 .value__M(4840)
@@ -1589,7 +1589,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity acresInSquareMile = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "acres_in_square_mile"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(acreScale)
                 .value__M(640)
@@ -1600,7 +1600,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity areaOfEnglandInSquareMiles = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "area_of_england_in_square_miles"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(area)
                 .uses_M(squareMileScale)
                 .value__M(50301)
@@ -1614,7 +1614,7 @@ public final class CustomDataset {
         // Metric measurements
         final IdentificationOfPhysicalQuantity cubicCentimetresInCubicDecimetre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "cubic_centimetres_in_cubic_decimetre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(cubicCentimetreScale)
                 .value__M(1000)
@@ -1625,7 +1625,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity cubicDecimetresInCubicMetre = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "cubic_decimetres_in_cubic_metre"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(cubicDecimetreScale)
                 .value__M(1000)
@@ -1636,7 +1636,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity minimumVolumeOlympicSwimmingPoolCubicMetres = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "minimum_volume_olympic_swimming_pool_cubic_metres"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(cubicMetreScale)
                 .value__M(2500)
@@ -1649,7 +1649,7 @@ public final class CustomDataset {
         // Imperial measurements
         final IdentificationOfPhysicalQuantity cubicInchesInCubicFoot = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "cubic_inches_in_cubic_foot"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(cubicInchScale)
                 .value__M(1728)
@@ -1660,7 +1660,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity averageHotTubVolumeCubicFeet = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "average_hot_tub_volume_cubic_feet"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(cubicFeetScale)
                 .value__M(25.4)
@@ -1671,7 +1671,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity fluidOuncesInPint = new 
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "fluid_ounces_in_pint"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(fluidOunceScale)
                 .value__M(20)
@@ -1682,7 +1682,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity pintsInQuart = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "pints_in_quart"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(pintScale)
                 .value__M(2)
@@ -1693,7 +1693,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity quartsInGallon = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "quarts_in_gallon"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(quartScale)
                 .value__M(4)
@@ -1704,7 +1704,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity minimumVolumeOlympicSwimmingPoolGallons = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "minimum_volume_olympic_swimming_pool_gallons"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(volume)
                 .uses_M(gallonScale)
                 .value__M(660430)
@@ -1718,7 +1718,7 @@ public final class CustomDataset {
         // Metric measurements
         final IdentificationOfPhysicalQuantity milligramsInGram = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "milligrams_in_a_gram"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(milligramScale)
                 .value__M(1000)
@@ -1729,7 +1729,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity gramsInKilogram = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "grams_in_a_kilogram"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(gramScale)
                 .value__M(1000)
@@ -1740,7 +1740,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity kilogramsInTonne = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "kilograms_in_a_tonne"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(kilogramScale)
                 .value__M(1000)
@@ -1751,7 +1751,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity maximumLightGoodsVehicleMassTonnes = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "maximum_light_goods_vehicle_mass_tonnes"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(tonneScale)
                 .value__M(3.5)
@@ -1764,7 +1764,7 @@ public final class CustomDataset {
         // Imperial measurements
         final IdentificationOfPhysicalQuantity ouncesInPound = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "ounces_in_pound"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(ounceScale)
                 .value__M(16)
@@ -1775,7 +1775,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity poundsInStone = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "pounds_in_stone"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(poundScale)
                 .value__M(14)
@@ -1786,7 +1786,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity stonesInTon = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "stones_in_ton"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(stoneScale)
                 .value__M(160)
@@ -1797,7 +1797,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity maximumLightGoodsVehicleMassTons = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "maximum_light_goods_vehicle_mass_tons"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(mass)
                 .uses_M(tonScale)
                 .value__M(3.85809)
@@ -1811,7 +1811,7 @@ public final class CustomDataset {
         // Begin create light quantities
         final IdentificationOfPhysicalQuantity averageCandleLightIntensityCandela = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "average_candle_light_intensity_candela"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(lightIntensity)
                 .uses_M(candelaScale)
                 .value__M(1)
@@ -1824,7 +1824,7 @@ public final class CustomDataset {
         // Begin create molecular quantities
         final IdentificationOfPhysicalQuantity molesInTwentyFourGramsCarbonTwelve = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "moles_in_twenty_four_grams_of_carbon_twelve"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(molarQuantity)
                 .uses_M(moleScale)
                 .value__M(2)
@@ -1838,7 +1838,7 @@ public final class CustomDataset {
         // Begin create electrical current quantities
         final IdentificationOfPhysicalQuantity milliamperesInAmpere = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "milliamperes_in_ampere"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(electricCurrent)
                 .uses_M(milliampereScale)
                 .value__M(1000)
@@ -1849,7 +1849,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity amperesInKiloampere = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "amperes_in_kiloampere"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(electricCurrent)
                 .uses_M(ampereScale)
                 .value__M(1000)
@@ -1860,7 +1860,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity averageColdCrankingKiloamperesForCar = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "average_cold_cranking_kiloamperes_for_car"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(electricCurrent)
                 .uses_M(kiloampereScale)
                 .value__M(0.4)
@@ -1874,7 +1874,7 @@ public final class CustomDataset {
         // Begin create electrical potential quantities
         final IdentificationOfPhysicalQuantity millivoltsInVolt = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "millivolts_in_volt"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(electricalPotential)
                 .uses_M(millivoltScale)
                 .value__M(1000)
@@ -1885,7 +1885,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity voltsInKilovolt = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "volts_in_kilovolt"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(electricalPotential)
                 .uses_M(voltScale)
                 .value__M(1000)
@@ -1896,7 +1896,7 @@ public final class CustomDataset {
 
         final IdentificationOfPhysicalQuantity maxNationalGridVoltage = new
             IdentificationOfPhysicalQuantityImpl.Builder(
-                new IRI(USER_BASE, "maximum_national_grid_voltage"))
+                new IRI(USER_BASE, uid()))
                 .represented_M(electricalPotential)
                 .uses_M(kilovoltScale)
                 .value__M(400)
