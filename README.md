@@ -24,41 +24,17 @@ Finally, we must write two scripts, one to be ran on building of the image, and 
 
 ## Installation
 
-Prior to any installation, ensure that your repository listings are updated and software packages are up-to-date.
+Prior to any installation, ensure that your repository listings, software packages are updated and pre-requisites are installed.
 
 ---
 
-### Docker
-
-#### Linux:
-
-1. Download the docker installation script using one of the following methods:
-    - `curl -fsSL https://get.docker.com/ -o install_docker.sh`
-    - `wget https://get.docker.com/ -o install_docker.sh`
-2. Enable execute permissions on the installation script:
-    - `chmod +x install_docker.sh`
-3. Run the installation script:
-    - `./install_docker.sh`
-
-#### Mac OSX
-
-1. Download the Docker Desktop installation program from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac), selecting the appropriate architecture for your device, direct links:
-    - [Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
-    - [Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg)
-2. Open the downloaded `.dmg` file, and once loaded, drag the icon into the `Applications folder`:
-    ![Drag and drop image](https://docs.docker.com/docker-for-mac/images/docker-app-drag.png)
-    Source: https://docs.docker.com/docker-for-mac/images/docker-app-drag.png
-
---- 
-
-### Git
-
-- Install using `apt`:
-    - `apt install git`
-- Install using `pacman`:
-    - `pacman -S git`
-- Install using `yum`:
-    - `yum install git`
+### Pre-requisites
+- [Docker](https://docs.docker.com/engine/install)
+- Git
+- Make
+- Policycoreutils
+- Selinux-basics
+- Selinux-utils
 
 ---
 
@@ -69,7 +45,7 @@ Prior to any installation, ensure that your repository listings are updated and 
 2. CD into the new folder for this repository:
     - `cd priote`
 3. Clone submodules of this repository:
-    - `git submodule update --init`
+    - `git submodule update --init --recursive --force --checkout`
 4. Launching the container can be done either manually or automatically:
     - To launch manually:
         1. CD into the Container directory:

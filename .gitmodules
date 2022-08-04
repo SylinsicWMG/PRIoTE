@@ -1,6 +1,3 @@
-[submodule "Container/files/HQDM"]
-	path = Container/files/HQDM
-	url = https://github.com/gchq/HQDM
 [submodule "Container/files/MagmaCore"]
 	path = Container/files/MagmaCore
 	url = https://github.com/gchq/MagmaCore
