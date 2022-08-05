@@ -26,6 +26,9 @@ Finally, we must write two scripts, one to be ran on building of the image, and 
 
 Prior to any installation, ensure that your repository listings, software packages are updated and pre-requisites are installed.
 
+N.B: Ubuntu misses the `virt_sandbox_domain_template` template and as such the SELinux policy compilation fails. Subsequently the launching of the container may fail.
+This may also be the case for other linux distributions, however, CentOS 8 is confirmed to work when testing.
+
 ---
 
 ### Pre-requisites
